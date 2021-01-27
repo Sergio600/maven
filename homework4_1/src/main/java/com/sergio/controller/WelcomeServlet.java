@@ -1,6 +1,7 @@
 package com.sergio.controller;
 
-import com.sergio.model.Product;
+import com.sergio.domain.Product;
+import com.sergio.service.OrderService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,12 +49,25 @@ public class WelcomeServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
 
+
         String name = req.getParameter("name");
+
+        OrderService orderService = new OrderService();
+        orderService.setCustomerName(name);
+
+        String html ="";
 
         List<Product> products = new ArrayList<>();
         products.add(new Product("Mobile phone", 10.0));
         products.add(new Product("Book", 5.0));
         products.add(new Product("Pen", 1.0));
+
+        for (Product product: products) {
+            html+=String.format("<option value=\"%s\">%s %s$</option>",
+                    product.getPrice(),
+                    product.getName(),
+                    product.getPrice()) ;
+        }
 
         Writer writer = resp.getWriter();
         writer.write("<!DOCTYPE html>\n" +
@@ -69,17 +83,9 @@ public class WelcomeServlet extends HttpServlet {
                 "    <div>Welcome, "+ name + "!!!</div>\n" +
                 "    <div>Make your order</div>\n" +
                 "    <div>\n" +
-                "        <form method=\"POST\" action=\"/homework4/cart\">\n" +
-                "            <select name=\"goods\" multiple>\n" +
-                "                <option name=\"Mobile phone\" value=\"10.0\" id=\"\">" +
-                                products.get(0).getName() + " " + products.get(0).getPrice() + "$" +
-                                "</option>\n" +
-                "                <option name=\"Book\" value=\"5.0\" id=\"\">" +
-                                products.get(1).getName() + " " + products.get(1).getPrice() + "$" +
-                                "</option>\n" +
-                "                <option name=\"Pen\" value=\"1.0\" id=\"\">" +
-                                products.get(2).getName() + " " + products.get(2).getPrice() + "$" +
-                               "</option>\n" +
+                "        <form method=\"POST\" action=\"/homework4_1/cart\">\n" +
+                "            <select name=\"goods\" multiple>\n size=\"1\">"  +
+                                html+
                 "            </select>\n" +
                 "            </br>"+
                 "            <input type=\"submit\"></input>\n" +

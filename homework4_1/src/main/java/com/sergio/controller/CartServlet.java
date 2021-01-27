@@ -38,6 +38,7 @@ public class CartServlet extends HttpServlet {
                 "</head>\n" +
                 "\n" +
                 "<body>\n" +
+                "    <div>Dear, "+": "+sum+ "!</div>\n" +
                 "    <div>Total price of your goods: "+sum+ "!</div>\n" +
                 "</body>\n" +
                 "\n" +
