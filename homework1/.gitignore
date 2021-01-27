@@ -1,0 +1,5 @@
+.gitattributes
+.idea
+target/
+pom.xml
+homework1.iml
