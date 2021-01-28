@@ -1,5 +1,7 @@
 package com.sergio.controller;
 
+import com.sergio.domain.Order;
+import com.sergio.domain.PriceList;
 import com.sergio.domain.Product;
 import com.sergio.service.OrderService;
 
@@ -12,8 +14,9 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-@WebServlet (name="WelcomeServlet", urlPatterns="/")
+@WebServlet(name = "WelcomeServlet", urlPatterns = "/")
 public class WelcomeServlet extends HttpServlet {
 
 
@@ -52,22 +55,18 @@ public class WelcomeServlet extends HttpServlet {
 
         String name = req.getParameter("name");
 
-        OrderService orderService = new OrderService();
-        orderService.setCustomerName(name);
+        OrderService.createOrder(name);
+        Map<String, Double> goods = PriceList.getPRODUCTS();
+        String html = "";
 
-        String html ="";
-
-        List<Product> products = new ArrayList<>();
-        products.add(new Product("Mobile phone", 10.0));
-        products.add(new Product("Book", 5.0));
-        products.add(new Product("Pen", 1.0));
-
-        for (Product product: products) {
-            html+=String.format("<option value=\"%s\">%s %s$</option>",
-                    product.getPrice(),
-                    product.getName(),
-                    product.getPrice()) ;
+        goods.get("Product1");
+        for (Map.Entry<String, Double> entry : goods.entrySet()) {
+            html += String.format("<option value=\"%s\">%s %s$</option>",
+                    entry.getKey(),
+                    entry.getKey(),
+                    entry.getValue());
         }
+
 
         Writer writer = resp.getWriter();
         writer.write("<!DOCTYPE html>\n" +
@@ -80,14 +79,14 @@ public class WelcomeServlet extends HttpServlet {
                 "</head>\n" +
                 "\n" +
                 "<body>\n" +
-                "    <div>Welcome, "+ name + "!!!</div>\n" +
+                "    <div>Welcome, " + name + "!!!</div>\n" +
                 "    <div>Make your order</div>\n" +
                 "    <div>\n" +
                 "        <form method=\"POST\" action=\"/homework4_1/cart\">\n" +
-                "            <select name=\"goods\" multiple>\n size=\"1\">"  +
-                                html+
+                "            <select name=\"goods\" multiple>\n size=\"1\">" +
+                html +
                 "            </select>\n" +
-                "            </br>"+
+                "            </br>" +
                 "            <input type=\"submit\"></input>\n" +
                 "        </form>\n" +
                 "    </div>\n" +

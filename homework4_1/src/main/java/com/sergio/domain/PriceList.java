@@ -16,11 +16,11 @@ public class PriceList {
 
 	private static Map<String, Double> initMap() {
 		Map<String, Double> products = new HashMap<>();
-		products.put("Product1", 30.0);
-		products.put("Product2", 10.0);
-		products.put("Product3", 40.0);
-		products.put("Product4", 60.0);
-		products.put("Product5", 340.0);
+		products.put("Book", 30.0);
+		products.put("TV", 500.0);
+		products.put("Car", 40000.0);
+		products.put("Mobile phone", 1000.0);
+		products.put("Shoes", 100.0);
 		return products;
 	}
 
