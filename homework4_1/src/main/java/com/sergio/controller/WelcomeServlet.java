@@ -55,18 +55,16 @@ public class WelcomeServlet extends HttpServlet {
 
         String name = req.getParameter("name");
 
-        OrderService.createOrder(name);
+        Order order = OrderService.createOrder(name);
         Map<String, Double> goods = PriceList.getPRODUCTS();
         String html = "";
 
-        goods.get("Product1");
-        for (Map.Entry<String, Double> entry : goods.entrySet()) {
+         for (Map.Entry<String, Double> entry : goods.entrySet()) {
             html += String.format("<option value=\"%s\">%s %s$</option>",
                     entry.getKey(),
                     entry.getKey(),
                     entry.getValue());
         }
-
 
         Writer writer = resp.getWriter();
         writer.write("<!DOCTYPE html>\n" +
@@ -86,6 +84,7 @@ public class WelcomeServlet extends HttpServlet {
                 "            <select name=\"goods\" multiple>\n size=\"1\">" +
                 html +
                 "            </select>\n" +
+                "            <input type=\"hidden\" name=\"id\" value=\""+order.getId() + "\"></input>\n" +
                 "            </br>" +
                 "            <input type=\"submit\"></input>\n" +
                 "        </form>\n" +

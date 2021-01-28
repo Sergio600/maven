@@ -25,8 +25,10 @@ public class CartServlet extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
 
         String[] s = req.getParameterValues("goods");
+        String id = req.getParameter("id");
 
-        Order order = OrderService.addProducts("1", s);
+
+        Order order = OrderService.addProducts(id, s);
         String name = order.getCustomer();
         List<Product> products = order.getProducts();
         double totalPrice = order.getTotalPrice();
