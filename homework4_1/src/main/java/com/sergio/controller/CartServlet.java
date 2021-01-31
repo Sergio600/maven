@@ -2,9 +2,7 @@ package com.sergio.controller;
 
 import com.sergio.domain.Order;
 import com.sergio.domain.Product;
-import com.sergio.repository.OrderRepository;
 import com.sergio.service.OrderService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,21 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @WebServlet(name="CartServlet", urlPatterns="/cart")
 public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("Cart servlet is works");
+
+
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
 
+
+
         String[] s = req.getParameterValues("goods");
         String id = req.getParameter("id");
-
 
         Order order = OrderService.addProducts(id, s);
         String name = order.getCustomer();
@@ -42,8 +42,10 @@ public class CartServlet extends HttpServlet {
                     product.getName(),
                     product.getPrice());
         }
+        System.out.println(orderInfo);
 
         Writer writer = resp.getWriter();
+
         writer.write("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "\n" +
@@ -60,5 +62,6 @@ public class CartServlet extends HttpServlet {
                 "</body>\n" +
                 "\n" +
                 "</html>");
+        writer.close();
     }
 }
