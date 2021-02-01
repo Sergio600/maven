@@ -46,7 +46,7 @@ public class CartServlet extends HttpServlet {
 
         Writer writer = resp.getWriter();
 
-        writer.write("<!DOCTYPE html>\n" +
+        String cartStr = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "\n" +
                 "<head>\n" +
@@ -61,7 +61,7 @@ public class CartServlet extends HttpServlet {
                 "    <div>Total price is: "+totalPrice+"$</div>\n" +
                 "</body>\n" +
                 "\n" +
-                "</html>");
+                "</html>";
         writer.close();
     }
 }

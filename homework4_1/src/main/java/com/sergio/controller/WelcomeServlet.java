@@ -15,28 +15,32 @@ public class WelcomeServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
-        Writer writer = resp.getWriter();
+        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
 
-        writer.write("<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "\n" +
-                "<head>\n" +
-                "    <meta charset=\"UTF-8\">\n" +
-                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-                "    <title>Online Shop</title>\n" +
-                "</head>\n" +
-                "\n" +
-                "<body>\n" +
-                "    <div>Welcome to online Shop</div>\n" +
-                "    <form method=\"POST\" action=\"products\">\n" +
-                "        <p><input name =\"name\" type=\"text\" placeholder=\"Enter your name\"></p>\n" +
-                "            <input type=\"checkbox\" name=\"checkbox\" value=\"checkbox\"> I agree with terms os service <Br>\n" +
-                "        <p><input type=\"submit\" value=\"Enter\"></p>\n" +
-                "    </form>\n" +
-                "</body>\n" +
-                "\n" +
-                "</html>");
-        writer.close();
+//        Writer writer = resp.getWriter();
+//
+//        String str = "<!DOCTYPE html>\n" +
+//                "<html lang=\"en\">\n" +
+//                "\n" +
+//                "<head>\n" +
+//                "    <meta charset=\"UTF-8\">\n" +
+//                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+//                "    <title>Online Shop</title>\n" +
+//                "</head>\n" +
+//                "\n" +
+//                "<body>\n" +
+//                "    <div>Welcome to online Shop</div>\n" +
+//                "    <form method=\"POST\" action=\"products\">\n" +
+//                "        <p><input name =\"name\" type=\"text\" placeholder=\"Enter your name\"></p>\n" +
+//                "            <input type=\"checkbox\" name=\"checkbox\" value=\"checkbox\"> I agree with terms os service <Br>\n" +
+//                "        <p><input type=\"submit\" value=\"Enter\"></p>\n" +
+//                "    </form>\n" +
+//                "</body>\n" +
+//                "\n" +
+//                "</html>";
+//        System.out.println(str);
+//        writer.write(str);
+//        writer.close();
     }
 }
 
