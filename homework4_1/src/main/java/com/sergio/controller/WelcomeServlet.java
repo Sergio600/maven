@@ -1,5 +1,6 @@
 package com.sergio.controller;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -9,13 +10,21 @@ import java.io.Writer;
 @WebServlet(name = "WelcomeServlet", urlPatterns = "/")
 public class WelcomeServlet extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
-        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+
+        req.getRequestDispatcher("jsp/welcome.jsp").forward(req, resp);
+
+
+
+
+    }
+}
+
+
 
 //        Writer writer = resp.getWriter();
 //
@@ -41,6 +50,4 @@ public class WelcomeServlet extends HttpServlet {
 //        System.out.println(str);
 //        writer.write(str);
 //        writer.close();
-    }
-}
 

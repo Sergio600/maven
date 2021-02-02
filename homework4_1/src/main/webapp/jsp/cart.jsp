@@ -8,8 +8,9 @@
 </head>
 
 <body>
-    <div>Dear, ergioS, your order is: </div>
-<p>1) Mobile phone 1000.0$</p>    <div>Total price is: 1000.0$</div>
+    <div>Dear, ${name}, your order is: </div>
+       ${orderInfo}
+    <div>Total price is: ${totalPrice}$</div>
 </body>
 
 </html>

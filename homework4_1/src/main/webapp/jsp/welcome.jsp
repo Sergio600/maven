@@ -11,7 +11,7 @@
     <div>Welcome to online Shop</div>
     <form method="POST" action="products">
         <p><input name ="name" type="text" placeholder="Enter your name"></p>
-            <input type="checkbox" name="checkbox" value="checkbox"> I agree with terms os service <Br>
+            <input type="checkbox" name="checkbox" value="checkbox"> I agree with terms of service <Br>
         <p><input type="submit" value="Enter"></p>
     </form>
 </body>
