@@ -2,6 +2,7 @@ package com.sergio.controller;
 
 import com.sergio.domain.Order;
 import com.sergio.domain.PriceList;
+import com.sergio.domain.Product;
 import com.sergio.service.OrderService;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "ProductServlet", urlPatterns = "/products")
@@ -19,10 +21,29 @@ public class ProductServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
 
-        String name = req.getParameter("name");
+        Order order;
+
+        HttpSession session = req.getSession();
+        if(session.getAttribute("customer")==null) {
+            String name = req.getParameter("customer");
+            order = OrderService.createOrder(name);
+            System.out.println(name);
 
 
-        Order order = OrderService.createOrder(name);
+
+
+
+
+        } else{
+            String name = (String) session.getAttribute("customer");
+            System.out.println(name);
+            order = OrderService.createOrder(name);
+
+            List<Product> products = order.getProducts();
+
+                     }
+
+
         Map<String, Double> goods = PriceList.getPRODUCTS();
 
         String html = "";
@@ -31,13 +52,14 @@ public class ProductServlet extends HttpServlet {
                     entry.getKey(),
                     entry.getKey(),
                     entry.getValue());
+
+
+            req.setAttribute("id", order.getId());
+            req.setAttribute("name", name);
+            req.setAttribute("html", html);
+
+            req.getRequestDispatcher("jsp/products.jsp").forward(req, resp);
         }
-
-        req.setAttribute("name", name);
-        req.setAttribute("html", html);
-
-        req.getRequestDispatcher("jsp/products.jsp").forward(req, resp);
-
 
     }
 }

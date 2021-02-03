@@ -41,6 +41,7 @@ public class CartServlet extends HttpServlet {
 
         req.setAttribute("orderInfo", orderInfo);
         req.setAttribute("name", name);
+
         req.setAttribute("totalPrice", totalPrice);
         req.getRequestDispatcher("jsp/cart.jsp").forward(req, resp);
 
