@@ -4,8 +4,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter(filterName = "AccessFilter", urlPatterns = {"/product", "/cart"})
-
+@WebFilter(filterName = "AccessFilter", urlPatterns = {"/product"})
 public class AccessFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -20,7 +19,7 @@ public class AccessFilter implements Filter {
        } else {
            req.getRequestDispatcher("/error").forward(req,resp);
        }
-       filterChain.doFilter(req, resp);
+//       filterChain.doFilter(req, resp);
     }
 
     @Override

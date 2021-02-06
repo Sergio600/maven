@@ -1,6 +1,7 @@
 package com.sergio.controller;
 import com.sergio.domain.PriceList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -12,6 +13,7 @@ public class WelcomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
+
         if (session.getAttribute("customer") != null) {
             req.setAttribute("products", PriceList.getPRODUCTS());
 
@@ -20,12 +22,9 @@ public class WelcomeServlet extends HttpServlet {
             // надо добаботать метод jsp строка 8 (тика создание или выбор нужного заказа)
             req.getRequestDispatcher("WEB-INF/jsp/products.jsp").forward(req, resp);
 
-
         } else {
             req.getRequestDispatcher("WEB-INF/jsp/welcome.jsp").forward(req, resp);
         }
-
-
     }
 }
 

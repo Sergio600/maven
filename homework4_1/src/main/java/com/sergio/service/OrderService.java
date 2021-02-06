@@ -28,15 +28,16 @@ public class OrderService {
         return OrderRepository.save(new Order(customer));
     }
 
-//    public static Order getOrderById (String id) {
-//        if (id == null) {
-//            throw new InvalidArgumentException("ID can't be null");
+//    public static Order getOrderByCustomer(String customer) {
+//        if (customer == null) {
+//            throw new InvalidArgumentException("Customer name can't be null");
 //        }
 //
-//        if (!OrderRepository.getById(id).isPresent()) {
+//        if (! OrderRepository.getById(customer).isPresent()) {
 //            throw new OrderNotFoundException("Order not found");
 //        }
-//        return OrderRepository.getById(id).get();
+//
+//        return OrderRepository.getById(customer).get();
 //    }
 
 

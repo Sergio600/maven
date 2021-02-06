@@ -19,17 +19,22 @@
     <div>Welcome, <%=order.getCustomer()%>!!!</div>
     <div>Make your order!</div>
     <div>
-         <c:forEach var="product" items="${order.getProducts()}">
-                <p>${product.getName()} (${product.getPrice}$)</p>
+
+         <c:forEach var="productOfCustomer" items="${order.getProducts()}">
+                <p>${productOfCustomer.getName()} (${productOfCustomer.getPrice}$)</p>
          </c:forEach>
+
     </div>
 
     <div>
         <form method="POST" action="cart">
+
             <select name="goods" size="1">
+
                 <c:forEach var="product" items="${products}">
-                    <option value="${product.key}">${product.key} (${product.value}$)</option>
+                    <option value="${product.key}"> ${product.key} (${product.value}$) </option>
                 </c:forEach>
+
              </select>
 
             <input type="hidden" name="id" value="<%=order.getId()%>"></input>
@@ -37,15 +42,12 @@
             </br>
 
             <input type="submit" value="add item"></input>
-            </form>
+        </form>
 
-            <%-- <form method="POST" action="cart">
-                <input type="submit" onclick="form.action='cart'"></input>
+            <form method="POST" action="cart">
+                <input type="submit" value="submit"></input>
                 <input type="hidden" name="id" value="<%=order.getId()%>"></input>
-            </form> --%>
-
-
-
+            </form>
 
     </div>
 </body>
