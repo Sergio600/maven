@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 <%@ page import="com.sergio.domain.Order"%>
 <%@ page import="com.sergio.repository.OrderRepository"%>
+<%@ page import="com.sergio.service.OrderService"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%Order order = OrderService.createOrGetOrder(session.getAttribute("customer").toString());%>
@@ -14,7 +16,7 @@
 </head>
 
 <body>
-    <div>Dear, <%=order.getCustomer()%>>, your order is: </div>
+    <div>Dear, <%=order.getCustomer()%>, your order is: </div>
 
     <% int index =0; %>
 

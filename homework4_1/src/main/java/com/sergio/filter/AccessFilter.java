@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(filterName = "AccessFilter", urlPatterns = {"/products", "/cart"})
+@WebFilter(filterName = "AccessFilter", urlPatterns = {"/chooseproducts", "/cart"})
 public class AccessFilter implements Filter {
 
     @Override

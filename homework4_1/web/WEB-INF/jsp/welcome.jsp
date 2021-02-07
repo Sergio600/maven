@@ -9,7 +9,7 @@
 
 <body>
     <div>Welcome to online Shop</div>
-    <form method="POST" action="products">
+    <form method="POST" action="chooseproducts">
         <p><input name ="customer" type="text" placeholder="Enter your name"></p>
             <input type="checkbox" name="acceptTerms"> I agree with terms of service </input>
             <Br>

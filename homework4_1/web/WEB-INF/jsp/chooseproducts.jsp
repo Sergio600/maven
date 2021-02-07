@@ -5,8 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-  <%Order order = OrderService.createOrGetOrder(session.getAttribute("customer").toString());
-  System.out.println(order.getCustomer());%>
+  <%Order order = OrderService.createOrGetOrder(session.getAttribute("customer").toString());%>
 
 <html lang="en">
 
@@ -22,7 +21,7 @@
 
 
     <div>
-        <form method="post" action="chooseProducts">
+        <form method="post" action="chooseproducts">
             <select name="selected" size="1">
                 <c:forEach var="product" items="${products}">
                     <option value="${product.key}"> ${product.key} (${product.value}$) </option>
@@ -40,11 +39,12 @@
             <form method="POST" action="cart">
                 <input type="submit" value="submit"></input>
                 <input type="hidden" name="id" value="<%=order.getId()%>"></input>
+                 <input type="hidden" name="customer" value="<%=order.getCustomer()%>"></input>
             </form>
 
         <div>
-            <c:forEach var="productOfCustomer" items="${order.getProducts()}">
-                <p>${productOfCustomer.getName()} (${productOfCustomer.getPrice}$)</p>
+            <c:forEach var="pickedProduct" items="${order.getProducts()}">
+                <p> ${pickedProduct.getName()} ${pickedProduct.getPrice()}</p>
             </c:forEach>
         </div>
 
