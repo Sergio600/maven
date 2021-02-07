@@ -6,6 +6,7 @@ import com.sergio.domain.Product;
 import com.sergio.exception.InvalidArgumentException;
 import com.sergio.exception.OrderNotFoundException;
 import com.sergio.repository.OrderRepository;
+import com.sergio.repository.UserRepository;
 
 import java.util.List;
 
@@ -21,25 +22,17 @@ public class OrderService {
      * @param customer customer name.
      * @return created order.
      */
-    public static Order createOrder(String customer) {
+    public static Order createOrGetOrder(String customer) {
         if (customer == null) {
             throw new InvalidArgumentException("Name can't be null");
         }
-        return OrderRepository.save(new Order(customer));
+        if(UserRepository.getByName(customer).isPresent()) {
+            return (Order) UserRepository.getByName(customer).get();
+        }
+        else {
+            return OrderRepository.save(new Order(customer));
+        }
     }
-
-//    public static Order getOrderByCustomer(String customer) {
-//        if (customer == null) {
-//            throw new InvalidArgumentException("Customer name can't be null");
-//        }
-//
-//        if (! OrderRepository.getById(customer).isPresent()) {
-//            throw new OrderNotFoundException("Order not found");
-//        }
-//
-//        return OrderRepository.getById(customer).get();
-//    }
-
 
     /**
      * Adds product to order.

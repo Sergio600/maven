@@ -5,7 +5,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-  <%Order order = OrderService.createOrder(session.getAttribute("customer").toString());%>
+  <%Order order = OrderService.createOrGetOrder(session.getAttribute("customer").toString());
+  System.out.println(order.getCustomer());%>
 
 <html lang="en">
 
@@ -18,19 +19,11 @@
 <body>
     <div>Welcome, <%=order.getCustomer()%>!!!</div>
     <div>Make your order!</div>
-    <div>
 
-         <c:forEach var="productOfCustomer" items="${order.getProducts()}">
-                <p>${productOfCustomer.getName()} (${productOfCustomer.getPrice}$)</p>
-         </c:forEach>
-
-    </div>
 
     <div>
-        <form method="POST" action="cart">
-
-            <select name="goods" size="1">
-
+        <form method="post" action="chooseProducts">
+            <select name="selected" size="1">
                 <c:forEach var="product" items="${products}">
                     <option value="${product.key}"> ${product.key} (${product.value}$) </option>
                 </c:forEach>
@@ -48,6 +41,12 @@
                 <input type="submit" value="submit"></input>
                 <input type="hidden" name="id" value="<%=order.getId()%>"></input>
             </form>
+
+        <div>
+            <c:forEach var="productOfCustomer" items="${order.getProducts()}">
+                <p>${productOfCustomer.getName()} (${productOfCustomer.getPrice}$)</p>
+            </c:forEach>
+        </div>
 
     </div>
 </body>

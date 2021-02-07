@@ -3,6 +3,8 @@
 <%@ page import="com.sergio.repository.OrderRepository"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%Order order = OrderService.createOrGetOrder(session.getAttribute("customer").toString());%>
+
 <html lang="en">
 
 <head>
@@ -12,16 +14,16 @@
 </head>
 
 <body>
-    <div>Dear, ${name}, your order is: </div>
+    <div>Dear, <%=order.getCustomer()%>>, your order is: </div>
 
     <% int index =0; %>
 
-     <c:forEach var="pickedProduct" items="${products}">
-           <p> <%= ++index %>) ${pickedProduct.getName()} (${pickedProduct.getPrice()}$)</p>
+     <c:forEach var="pickedProduct" items="${order.getProducts()}">
+           <p> <%= ++index %>) ${pickedProduct.getName()} ${pickedProduct.getPrice()}$</p>
      </c:forEach>
 
 
-    <div>Total price is: ${totalPrice}</div>
+    <div>Total price is: <%=order.getTotalPrice()%>$</div>
 </body>
 
 </html>

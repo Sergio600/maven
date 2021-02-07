@@ -16,12 +16,7 @@ public class WelcomeServlet extends HttpServlet {
 
         if (session.getAttribute("customer") != null) {
             req.setAttribute("products", PriceList.getPRODUCTS());
-
-            //нужно доработать, добавление тех вещей которые уже были добавлены в корзину
-            // ошибка в том, что каждый раз создается новый заказ, для уже существующей сессии
-            // надо добаботать метод jsp строка 8 (тика создание или выбор нужного заказа)
             req.getRequestDispatcher("WEB-INF/jsp/products.jsp").forward(req, resp);
-
         } else {
             req.getRequestDispatcher("WEB-INF/jsp/welcome.jsp").forward(req, resp);
         }

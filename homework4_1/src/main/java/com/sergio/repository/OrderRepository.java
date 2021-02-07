@@ -42,4 +42,8 @@ public class OrderRepository {
 		}
 		return Optional.empty();
 	}
+
+	public static List<Order> getOrders() {
+		return orders;
+	}
 }

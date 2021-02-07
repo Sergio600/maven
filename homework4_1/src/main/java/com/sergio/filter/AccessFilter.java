@@ -2,23 +2,36 @@ package com.sergio.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(filterName = "AccessFilter", urlPatterns = {"/products"})
+@WebFilter(filterName = "AccessFilter", urlPatterns = {"/products", "/cart"})
 public class AccessFilter implements Filter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {    }
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain) throws IOException, ServletException {
-       String checkBox = req.getParameter("accessToEnter");
-       if(checkBox!=null){
-           req.getRequestDispatcher("/products").forward(req,resp);
-       } else {
-           req.getRequestDispatcher("/error").forward(req,resp);
-       }
-//       filterChain.doFilter(req, resp);
+        HttpServletRequest httpServletRequest = (HttpServletRequest) req;
+
+
+
+        if ((httpServletRequest.getSession().getAttribute("customer") == null &&
+                req.getParameter("customer") == null || httpServletRequest.getSession().getAttribute("customer")==null&&
+                req.getParameter("customer").equals("")||
+                (req.getParameter("acceptTerms") == null &&
+                (httpServletRequest.getSession().getAttribute("acceptTerms") == null)))){
+
+            ((HttpServletResponse) resp).sendError(401);
+
+
+        } else {
+            httpServletRequest.getSession().setAttribute("acceptTerms", "accepted");
+            filterChain.doFilter(req, resp);
+        }
     }
 
     @Override

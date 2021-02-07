@@ -2,8 +2,6 @@ package com.sergio.controller;
 
 import com.sergio.domain.Order;
 import com.sergio.domain.Product;
-import com.sergio.exception.OrderNotFoundException;
-import com.sergio.repository.OrderRepository;
 import com.sergio.service.OrderService;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
