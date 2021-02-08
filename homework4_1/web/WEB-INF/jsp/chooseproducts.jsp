@@ -3,7 +3,9 @@
 <%@ page import="com.sergio.service.OrderService"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+     <style>
+        <%@include file="/WEB-INF/css/style.css"%>
+     </style>
 
   <%Order order = OrderService.createOrGetOrder(session.getAttribute("customer").toString());%>
 
@@ -16,36 +18,37 @@
 </head>
 
 <body>
-    <div>Welcome, <%=order.getCustomer()%>!!!</div>
-    <div>Make your order!</div>
+    <div class="container">
+        <div class="header">Welcome, <%=order.getCustomer()%>!!!</div>
+        </br>
+        <div>Make your order!</div>
 
-
-    <div>
-        <form method="post" action="chooseproducts">
-            <select name="selected" size="1">
-                <c:forEach var="product" items="${products}">
-                    <option value="${product.key}"> ${product.key} (${product.value}$) </option>
-                </c:forEach>
-
-             </select>
-
-            <input type="hidden" name="id" value="<%=order.getId()%>"></input>
-
-            </br>
-
-            <input type="submit" value="add item"></input>
-        </form>
-
-            <form method="POST" action="cart">
-                <input type="submit" value="submit"></input>
-                <input type="hidden" name="id" value="<%=order.getId()%>"></input>
-                 <input type="hidden" name="customer" value="<%=order.getCustomer()%>"></input>
-            </form>
 
         <div>
-            <c:forEach var="pickedProduct" items="${order.getProducts()}">
-                <p> ${pickedProduct.getName()} ${pickedProduct.getPrice()}</p>
-            </c:forEach>
+            <form method="post" action="chooseproducts">
+                <select name="selected" size="1">
+                    <c:forEach var="product" items="${products}">
+                        <option value="${product.key}"> ${product.key} (${product.value}$) </option>
+                    </c:forEach>
+
+                 </select>
+
+                <input type="hidden" name="id" value="<%=order.getId()%>"></input>
+                <input type="submit" value="add item"></input>
+            </form>
+
+                <form method="POST" action="cart">
+                    <input type="submit" value="submit"></input>
+                    <input type="hidden" name="id" value="<%=order.getId()%>"></input>
+                     <input type="hidden" name="customer" value="<%=order.getCustomer()%>"></input>
+                </form>
+
+            <div>
+                <c:forEach var="pickedProduct" items="${order.getProducts()}">
+                    <p> ${pickedProduct.getName()} ${pickedProduct.getPrice()}</p>
+                </c:forEach>
+            </div>
+
         </div>
 
     </div>

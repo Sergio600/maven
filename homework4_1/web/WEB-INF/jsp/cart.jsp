@@ -4,6 +4,9 @@
 <%@ page import="com.sergio.service.OrderService"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <style>
+        <%@include file="/WEB-INF/css/style.css"%>
+    </style>
 
 <%Order order = OrderService.createOrGetOrder(session.getAttribute("customer").toString());%>
 
@@ -16,7 +19,8 @@
 </head>
 
 <body>
-    <div>Dear, <%=order.getCustomer()%>, your order is: </div>
+<div class="container">
+    <div class="header">Dear, <%=order.getCustomer()%>, your order is: </div>
 
     <% int index =0; %>
 
@@ -25,7 +29,8 @@
      </c:forEach>
 
 
-    <div>Total price is: <%=order.getTotalPrice()%>$</div>
+    <div class="totalPrice">Total price is: <%=order.getTotalPrice()%>$</div>
+</div>
 </body>
 
 </html>
