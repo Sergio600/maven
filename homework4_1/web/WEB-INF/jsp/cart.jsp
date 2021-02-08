@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selected item</title>
+    <title>Cart</title>
 </head>
 
 <body>
@@ -26,17 +26,18 @@
 
      <c:forEach var="pickedProduct" items="${order.getProducts()}">
            <p> <%= ++index %>) ${pickedProduct.getName()} ${pickedProduct.getPrice()}$</p>
+
      </c:forEach>
 
 
     <div class="totalPrice">Total price is: <%=order.getTotalPrice()%>$</div>
 
     <form method="POST" action="/homework4_1">
-           <input type="submit" name="add" value="add more"></input>
+           <input type="submit" name="add" value="Edit cart"></input>
     </form>
 
      <form method="POST" action="cart">
-           <input type="submit" name="exit" value="exit"></input>
+           <input type="submit" name="exit" value="Exit"></input>
      </form>
 
 </div>

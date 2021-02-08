@@ -16,6 +16,7 @@ public class CartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
+
         if(req.getParameter("exit")!=null){
             System.out.println("Была нажата кнопка exit");
             session.invalidate();

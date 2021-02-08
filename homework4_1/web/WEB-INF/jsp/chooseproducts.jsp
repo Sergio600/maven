@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Choose items</title>
 </head>
 
 <body>
@@ -25,7 +25,7 @@
 
 
         <div>
-            <form method="post" action="chooseproducts">
+            <form method="post" id="addprod" action="chooseproducts">
                 <select name="selected" size="1">
                     <c:forEach var="product" items="${products}">
                         <option value="${product.key}"> ${product.key} (${product.value}$) </option>
@@ -38,7 +38,7 @@
 
             </form>
 
-                <form method="POST" action="cart">
+                <form method="POST" id="addprod" action="cart">
                     <input type="submit" value="submit"></input>
                      <input type="submit" name="exit" value="exit"></input>
                     <input type="hidden" name="id" value="<%=order.getId()%>"></input>
@@ -46,8 +46,10 @@
                 </form>
 
             <div>
+             <% int index =0; %>
                 <c:forEach var="pickedProduct" items="${order.getProducts()}">
                     <p> ${pickedProduct.getName()} ${pickedProduct.getPrice()}</p>
+                     <button type="submit" value="<%=index++%>" name="remove" form="addprod">remove</button>
                 </c:forEach>
             </div>
 

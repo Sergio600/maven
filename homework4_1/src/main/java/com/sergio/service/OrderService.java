@@ -65,6 +65,45 @@ public class OrderService {
         return order;
     }
 
+    public static Order removeProduct(String id, int index){
+        Order order;
+        if (OrderRepository.getById(id).isPresent()) {
+            order = OrderRepository.getById(id).get();
+        } else {
+            throw new OrderNotFoundException("Order not found");
+        }
+        List<Product> products = order.getProducts();
+        products.remove(index);
+        order.setProducts(products);
+        return order;
+    }
+
+//    public static Order removeProduct(String id, ) {
+//        if (id == null || selectedProducts == null) {
+//            throw new InvalidArgumentException("Arguments cant be null");
+//        }
+//        Order order;
+//        if (OrderRepository.getById(id).isPresent()) {
+//            order = OrderRepository.getById(id).get();
+//        } else {
+//            throw new OrderNotFoundException("Order not found");
+//        }
+//
+//        List<Product> products = order.getProducts();
+//        for (String productName : selectedProducts) {
+//
+//            Product product = new Product();
+//            product.setName(productName);
+//            product.setPrice(PriceList.getPRODUCTS().get(productName));
+//            products.add(product);
+//            order.setTotalPrice(calcTotalPrice(order));
+//        }
+//        order.setProducts(products);
+//        return order;
+//    }
+
+
+
     /**
      * Calculates total price of order.
      *
