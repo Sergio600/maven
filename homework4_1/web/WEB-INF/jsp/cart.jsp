@@ -30,6 +30,15 @@
 
 
     <div class="totalPrice">Total price is: <%=order.getTotalPrice()%>$</div>
+
+    <form method="POST" action="/homework4_1">
+           <input type="submit" name="add" value="add more"></input>
+    </form>
+
+     <form method="POST" action="cart">
+           <input type="submit" name="exit" value="exit"></input>
+     </form>
+
 </div>
 </body>
 
