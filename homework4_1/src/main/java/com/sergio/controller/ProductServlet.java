@@ -16,6 +16,9 @@ public class ProductServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String customer;
 
+
+
+
         if(session.getAttribute("customer") == null && req.getParameter("customer")!=null) {
             session.setAttribute("customer", req.getParameter("customer"));
             customer = req.getParameter("customer");

@@ -34,11 +34,13 @@
                  </select>
 
                 <input type="hidden" name="id" value="<%=order.getId()%>"></input>
-                <input type="submit" value="add item"></input>
+                <input type="submit" name="additem" value="add item"></input>
+
             </form>
 
                 <form method="POST" action="cart">
                     <input type="submit" value="submit"></input>
+                     <input type="submit" name="exit" value="exit"></input>
                     <input type="hidden" name="id" value="<%=order.getId()%>"></input>
                      <input type="hidden" name="customer" value="<%=order.getCustomer()%>"></input>
                 </form>
