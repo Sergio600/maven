@@ -19,19 +19,10 @@ public class ProductServlet extends HttpServlet {
         if(session.getAttribute("customer") == null && req.getParameter("customer")!=null) {
             session.setAttribute("customer", req.getParameter("customer"));
             customer = req.getParameter("customer");
-            System.out.println("Имя пользователя из 1 пункта" + customer);
         } else {
             customer = session.getAttribute("customer").toString();
-            System.out.println("Имя пользователя из 2 пункта" + customer);
-
-            String [] str = req.getParameterValues("selected");
-            System.out.println(str[0]);
-
         }
-
         Order order = OrderService.createOrGetOrder(customer);
-
-        System.out.println("из текста"+order.getCustomer());
 
         if (req.getParameterValues("selected")!=null){
             OrderService.addProducts(order.getId()+"", req.getParameterValues("selected"));
