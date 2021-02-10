@@ -82,7 +82,6 @@ public class OrderService {
         List<Product> products = order.getProducts();
         products.remove(index);
         order.setProducts(products);
-
         return order;
     }
 

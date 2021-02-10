@@ -24,7 +24,6 @@ public class ProductServlet extends HttpServlet {
         } else {
             customer = session.getAttribute("customer").toString();
         }
-
         Order order = OrderService.createOrGetOrder(customer);
 
 
