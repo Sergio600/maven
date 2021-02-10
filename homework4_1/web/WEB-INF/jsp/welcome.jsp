@@ -16,7 +16,7 @@
     <div class="container">
     <div class="header">Welcome to online Shop</div>
     <form method="POST" action="chooseproducts">
-        <p><input name ="customer" type="text" placeholder="Enter your name"></p>
+        <p><input name ="customer" type="text" placeholder="Enter your name" required></p>
             <input type="checkbox" name="acceptTerms"> I agree with terms of service </input>
             <Br>
         <p><input type="submit" value="Enter"></p>
