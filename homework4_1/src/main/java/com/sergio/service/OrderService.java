@@ -23,10 +23,13 @@ public class OrderService {
      * @return created order.
      */
     public static Order createOrGetOrder(String customer) {
+
+
         if (customer == null) {
             throw new InvalidArgumentException("Name can't be null");
         }
         if(UserRepository.getByName(customer).isPresent()) {
+
             return (Order) UserRepository.getByName(customer).get();
         }
         else {

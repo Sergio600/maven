@@ -14,9 +14,9 @@ public class SqlHelper {
             //создается новая база с именем указанным в url test1
             Class.forName("org.h2.Driver");
             return DriverManager.getConnection(
-                    "jdbc:h2:~/test1;",
+                    "jdbc:h2:~/test;",
                     "sergio",
-                    "sergio");
+                    "12345");
 
         } catch (SQLException |ClassNotFoundException e){
             e.printStackTrace();
@@ -25,16 +25,18 @@ public class SqlHelper {
     }
 
 
-    public static void initDB() {
-        System.out.println("init database");
-        try {
-            PreparedStatement ps = connection.prepareStatement("" +
-                    "insert into good (title,price)" +
-                    "values('test',100)");
-            ps.execute();
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
+//    public static void initDB() {
+//        System.out.println("init database");
+//        try {
+//            PreparedStatement ps = connection.prepareStatement("" +
+//                    "insert into good (title,price)" +
+//                    "values('test',100)");
+//
+//            System.out.println("new good is added to table good");
+//            ps.execute();
+//
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//    }
 }

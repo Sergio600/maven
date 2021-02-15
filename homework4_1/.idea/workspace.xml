@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -23,9 +20,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d18ceb26-2f2f-447f-867c-aecb8e7cef48" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sergio/Listener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sergio/sql/SqlHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sergio/domain/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sergio/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homework4_1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/homework4_1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sergio/Listener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sergio/Listener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sergio/controller/CartServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sergio/controller/CartServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sergio/controller/ProductServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sergio/controller/ProductServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sergio/controller/WelcomeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sergio/controller/WelcomeServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sergio/domain/PriceList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sergio/domain/PriceList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sergio/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sergio/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sergio/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sergio/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sergio/sql/SqlHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sergio/sql/SqlHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sergio/controller/WelcomeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sergio/controller/WelcomeServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sergio/domain/PriceList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sergio/domain/PriceList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/homework4_1-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework4_1-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/homework4_1-1.0-SNAPSHOT/WEB-INF/classes/com/sergio/controller/WelcomeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework4_1-1.0-SNAPSHOT/WEB-INF/classes/com/sergio/controller/WelcomeServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/homework4_1-1.0-SNAPSHOT/WEB-INF/classes/com/sergio/domain/PriceList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework4_1-1.0-SNAPSHOT/WEB-INF/classes/com/sergio/domain/PriceList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tomcat/logs/access_log.2021-02-09" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/homework4_1/org/apache/jsp/WEB_002dINF/jsp/cart_jsp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/homework4_1/org/apache/jsp/WEB_002dINF/jsp/cart_jsp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/homework4_1/org/apache/jsp/WEB_002dINF/jsp/cart_jsp.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/homework4_1/org/apache/jsp/WEB_002dINF/jsp/cart_jsp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/homework4_1/org/apache/jsp/WEB_002dINF/jsp/chooseproducts_jsp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/homework4_1/org/apache/jsp/WEB_002dINF/jsp/chooseproducts_jsp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/homework4_1/org/apache/jsp/WEB_002dINF/jsp/chooseproducts_jsp.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/homework4_1/org/apache/jsp/WEB_002dINF/jsp/chooseproducts_jsp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/homework4_1/org/apache/jsp/WEB_002dINF/jsp/error/_401_jsp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/homework4_1/org/apache/jsp/WEB_002dINF/jsp/error/_401_jsp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/homework4_1/org/apache/jsp/WEB_002dINF/jsp/welcome_jsp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/homework4_1/org/apache/jsp/WEB_002dINF/jsp/welcome_jsp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/homework4_1/org/apache/jsp/WEB_002dINF/jsp/welcome_jsp.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/homework4_1/org/apache/jsp/WEB_002dINF/jsp/welcome_jsp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/webapp1/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/webapp1/jsp/ExampleTwo.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/webapp1/jsp/cart.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/webapp1/jsp/chooseproducts.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/webapp1/jsp/products.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/webapp1/jsp/welcome.jsp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +91,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/temp/webapp1/jsp" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -116,7 +144,10 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="d18ceb26-2f2f-447f-867c-aecb8e7cef48" name="Default Changelist" comment="" />
@@ -156,10 +187,11 @@
     </state>
     <state x="104" y="14" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.800@0.0.1280.800" timestamp="1612116281532" />
     <state x="104" y="37" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1280.706@0.25.1280.706" timestamp="1611750320345" />
-    <state x="453" y="71" key="#com.intellij.ide.util.MemberChooser" timestamp="1612987982231">
-      <screen x="0" y="0" width="1280" height="800" />
+    <state x="680" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1613123420079">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="453" y="71" key="#com.intellij.ide.util.MemberChooser/0.0.1280.800@0.0.1280.800" timestamp="1612987982231" />
+    <state x="680" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1613123420079" />
     <state x="453" y="88" key="#com.intellij.ide.util.MemberChooser/0.25.1280.706@0.25.1280.706" timestamp="1611749991170" />
     <state x="414" y="273" width="452" height="262" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1611771826574">
       <screen x="0" y="0" width="1280" height="800" />
@@ -169,25 +201,29 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="624" y="78" width="474" height="722" key="#xdebugger.evaluate/0.0.1280.800@0.0.1280.800" timestamp="1612715703038" />
-    <state width="1238" height="275" key="GridCell.Tab.0.bottom" timestamp="1612992651331">
-      <screen x="0" y="0" width="1280" height="800" />
+    <state width="1232" height="378" key="GridCell.Tab.0.bottom" timestamp="1613124634304">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1238" height="275" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1612992651331" />
+    <state width="1232" height="378" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1613124634304" />
     <state width="1238" height="261" key="GridCell.Tab.0.bottom/0.25.1280.706@0.25.1280.706" timestamp="1612447210178" />
-    <state width="1238" height="275" key="GridCell.Tab.0.center" timestamp="1612992651329">
-      <screen x="0" y="0" width="1280" height="800" />
+    <state width="1232" height="378" key="GridCell.Tab.0.center" timestamp="1613124634304">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1238" height="275" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1612992651329" />
+    <state width="1232" height="378" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1613124634304" />
     <state width="1238" height="261" key="GridCell.Tab.0.center/0.25.1280.706@0.25.1280.706" timestamp="1612447210177" />
-    <state width="1238" height="275" key="GridCell.Tab.0.left" timestamp="1612992651328">
-      <screen x="0" y="0" width="1280" height="800" />
+    <state width="1232" height="378" key="GridCell.Tab.0.left" timestamp="1613124634303">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1238" height="275" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1612992651328" />
+    <state width="1232" height="378" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1613124634303" />
     <state width="1238" height="261" key="GridCell.Tab.0.left/0.25.1280.706@0.25.1280.706" timestamp="1612447210176" />
-    <state width="1238" height="275" key="GridCell.Tab.0.right" timestamp="1612992651330">
-      <screen x="0" y="0" width="1280" height="800" />
+    <state width="1232" height="378" key="GridCell.Tab.0.right" timestamp="1613124634304">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1238" height="275" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1612992651330" />
+    <state width="1232" height="378" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1613124634304" />
     <state width="1238" height="261" key="GridCell.Tab.0.right/0.25.1280.706@0.25.1280.706" timestamp="1612447210177" />
     <state width="1238" height="397" key="GridCell.Tab.1.bottom" timestamp="1612991073530">
       <screen x="0" y="0" width="1280" height="800" />
@@ -229,10 +265,11 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="340" y="180" key="refactoring.ChangeSignatureDialog/0.0.1280.800@0.0.1280.800" timestamp="1612438099110" />
-    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1612987978527">
-      <screen x="0" y="0" width="1280" height="800" />
+    <state x="458" y="167" width="1005" height="913" key="search.everywhere.popup" timestamp="1613122897126">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1612987978527" />
+    <state x="458" y="167" width="1005" height="913" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1613122897126" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

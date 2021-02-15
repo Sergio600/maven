@@ -18,7 +18,6 @@ public class CartServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
         if(req.getParameter("exit")!=null){
-            System.out.println("Была нажата кнопка exit");
             session.invalidate();
             req.getRequestDispatcher("WEB-INF/jsp/welcome.jsp").forward(req, resp);
             return;

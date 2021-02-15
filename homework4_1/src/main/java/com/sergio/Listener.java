@@ -12,7 +12,7 @@ public class Listener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Hello Listener is works!");
-        SqlHelper.initDB();
+//        SqlHelper.initDB();
 
     }
 
