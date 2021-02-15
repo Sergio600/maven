@@ -1,10 +1,19 @@
 package com.sergio.domain;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class User {
+    private static AtomicInteger count = new AtomicInteger(0);
+
     private int userId;
     private String name;
     private String paswsword;
     private Order order;
+
+    public User(String name) {
+        this.userId = count.incrementAndGet();
+        this.name = name;
+    }
 
     public Order getOrder() {
         return order;

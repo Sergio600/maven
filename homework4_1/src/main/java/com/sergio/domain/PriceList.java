@@ -30,7 +30,7 @@ public class PriceList {
                     "Select * from good");
             while (rs.next()) {
                 String productTitle = rs.getString("title");
-                String productPrice = rs.getString("title");
+                String productPrice = rs.getString("price");
                 products.put(productTitle, Double.parseDouble(productPrice));
             }
         } catch (SQLException throwables) {
@@ -43,6 +43,11 @@ public class PriceList {
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
+            }
+            try {
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
         }
 

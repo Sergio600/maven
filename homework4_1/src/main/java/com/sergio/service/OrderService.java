@@ -3,11 +3,13 @@ package com.sergio.service;
 import com.sergio.domain.Order;
 import com.sergio.domain.PriceList;
 import com.sergio.domain.Product;
+import com.sergio.domain.User;
 import com.sergio.exception.InvalidArgumentException;
 import com.sergio.exception.OrderNotFoundException;
 import com.sergio.repository.OrderRepository;
 import com.sergio.repository.UserRepository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -19,21 +21,20 @@ public class OrderService {
     /**
      * Creates order and returns saved order.
      *
-     * @param customer customer name.
+     * @param user .
      * @return created order.
      */
-    public static Order createOrGetOrder(String customer) {
-
-
-        if (customer == null) {
+    public static Order createOrGetOrder(User user) {
+        if (user == null) {
             throw new InvalidArgumentException("Name can't be null");
         }
-        if(UserRepository.getByName(customer).isPresent()) {
 
-            return (Order) UserRepository.getByName(customer).get();
-        }
-        else {
-            return OrderRepository.save(new Order(customer));
+        if (UserRepository.getByName(user.getName()).isPresent()) {
+            return (Order) OrderRepository.getOrderByUserName(user.getName()).get();
+
+        } else {
+            Order order = OrderRepository.save(new Order(user));
+            return order;
         }
     }
 
@@ -75,7 +76,7 @@ public class OrderService {
      * @param index
      * @return order with removed product
      */
-    public static Order removeProduct(String id, int index){
+    public static Order removeProduct(String id, int index) {
         Order order;
         if (OrderRepository.getById(id).isPresent()) {
             order = OrderRepository.getById(id).get();

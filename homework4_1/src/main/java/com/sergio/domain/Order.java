@@ -12,12 +12,12 @@ public class Order {
 	private static AtomicInteger count = new AtomicInteger(0);
 
 	private int id;
-	private String customer;
+	private User user;
 	private List<Product> products = new ArrayList<>();
 	private double totalPrice;
 
-	public Order(String customer) {
-		this.customer = customer;
+	public Order(User user) {
+		this.user = user;
 		this.id = count.incrementAndGet();
 	}
 
@@ -33,8 +33,8 @@ public class Order {
 		this.totalPrice = totalPrice;
 	}
 
-	public String getCustomer() {
-		return customer;
+	public User getUser() {
+		return user;
 	}
 
 	public List<Product> getProducts() {

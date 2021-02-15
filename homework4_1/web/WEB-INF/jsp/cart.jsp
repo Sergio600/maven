@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 <%@ page import="com.sergio.domain.Order"%>
+<%@ page import="com.sergio.domain.User"%>
 <%@ page import="com.sergio.repository.OrderRepository"%>
 <%@ page import="com.sergio.service.OrderService"%>
+<%@ page import="com.sergio.service.UserService"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <style>
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
 
-<%Order order = OrderService.createOrGetOrder(session.getAttribute("customer").toString());%>
+ <%Order order = OrderService.createOrGetOrder(UserService.createOrGetUser(session.getAttribute("customer").toString()));%>
 
 <html lang="en">
 
@@ -20,7 +22,7 @@
 
 <body>
 <div class="container">
-    <div class="header">Dear, <%=order.getCustomer()%>, your order is: </div>
+    <div class="header">Dear, <%=order.getUser().getName()%>, your order is: </div>
 
     <% int index =0; %>
 

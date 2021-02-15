@@ -1,7 +1,10 @@
 package com.sergio.controller;
 
 import com.sergio.domain.Order;
+import com.sergio.domain.User;
 import com.sergio.service.OrderService;
+import com.sergio.service.UserService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +19,7 @@ public class CartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
+        String customer;
 
         if(req.getParameter("exit")!=null){
             session.invalidate();
@@ -23,7 +27,8 @@ public class CartServlet extends HttpServlet {
             return;
         }
 
-        Order order = OrderService.createOrGetOrder(req.getParameter("customer"));
+        customer = req.getParameter("customer");
+        Order order = OrderService.createOrGetOrder(UserService.createOrGetUser(customer));
         req.setAttribute("order", order);
         req.getRequestDispatcher("WEB-INF/jsp/cart.jsp").forward(req, resp);
     }
