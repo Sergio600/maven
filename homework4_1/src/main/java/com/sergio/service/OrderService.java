@@ -8,7 +8,10 @@ import com.sergio.exception.InvalidArgumentException;
 import com.sergio.exception.OrderNotFoundException;
 import com.sergio.repository.OrderRepository;
 import com.sergio.repository.UserRepository;
+import com.sergio.sql.SqlHelper;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -65,7 +68,20 @@ public class OrderService {
             products.add(product);
             order.setTotalPrice(calcTotalPrice(order));
         }
+
         order.setProducts(products);
+        SqlHelper.updateOrderTotalPrice(order);
+
+//        Connection conn = SqlHelper.getConnection();
+//        try {
+//            PreparedStatement ps = conn.prepareStatement("UPDATE ORDERS SET TOTAL_PRICE =? WHERE ID =?");
+//            ps.setDouble(1, order.getTotalPrice());
+//            ps.setInt(2, order.getId());
+//            ps.execute();
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         return order;
     }
 
@@ -86,6 +102,21 @@ public class OrderService {
         List<Product> products = order.getProducts();
         products.remove(index);
         order.setProducts(products);
+
+        SqlHelper.updateOrderTotalPrice(order);
+
+//        Connection conn = SqlHelper.getConnection();
+//        try {
+//            PreparedStatement ps = conn.prepareStatement("UPDATE ORDERS SET TOTAL_PRICE =? WHERE ID =?");
+//            ps.setDouble(1, order.getTotalPrice());
+//            ps.setInt(2, order.getId());
+//            ps.execute();
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+
+
         return order;
     }
 

@@ -28,13 +28,16 @@ public class OrderRepository {
      * @return saved order.
      */
     public static Order save(Order order) {
+
         orders.add(order);
+        SqlHelper.addNewOrder(order);
 
 //        Connection conn = SqlHelper.getConnection();
 //        try {
-//            PreparedStatement ps = conn.prepareStatement("INSERT INTO ORDER(USER_ID, TOTAL_PRICE) VALUES (?,?)");
-//            ps.setInt(1, order.getUser().getUserId());
-//            ps.setDouble(2, order.getTotalPrice());
+//            PreparedStatement ps = conn.prepareStatement("INSERT INTO ORDERS(ID, USER_ID, TOTAL_PRICE) VALUES (?,?,?)");
+//            ps.setInt(1, order.getId());
+//            ps.setInt(2, order.getUser().getUserId());
+//            ps.setDouble(3, order.getTotalPrice());
 //            ps.execute();
 //
 //        } catch (SQLException e) {
