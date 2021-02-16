@@ -21,7 +21,6 @@ public class ProductServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String customer;
 
-
         if (session.getAttribute("customer") == null && req.getParameter("customer") != null) {
             session.setAttribute("customer", req.getParameter("customer"));
             customer = req.getParameter("customer");
@@ -32,9 +31,6 @@ public class ProductServlet extends HttpServlet {
         User user = UserService.createOrGetUser((customer));
 
         Order order = OrderService.createOrGetOrder(user);
-
-
-
 
         /**
          * Check request parameter remove
@@ -48,7 +44,6 @@ public class ProductServlet extends HttpServlet {
                 OrderService.addProducts(order.getId() + "", req.getParameterValues("selected"));
             }
         }
-
 
         req.setAttribute("products", PriceList.getPRODUCTS());
         req.setAttribute("order", OrderService.createOrGetOrder(UserService.createOrGetUser(customer)));

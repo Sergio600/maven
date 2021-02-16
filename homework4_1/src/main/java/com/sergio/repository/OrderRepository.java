@@ -21,6 +21,10 @@ public class OrderRepository {
     private OrderRepository() {
     }
 
+    public static List<Order> getOrders() {
+        return orders;
+    }
+
     /**
      * Saves order in "data base" (list of orders).
      *
@@ -31,18 +35,6 @@ public class OrderRepository {
 
         orders.add(order);
         SqlHelper.addNewOrder(order);
-
-//        Connection conn = SqlHelper.getConnection();
-//        try {
-//            PreparedStatement ps = conn.prepareStatement("INSERT INTO ORDERS(ID, USER_ID, TOTAL_PRICE) VALUES (?,?,?)");
-//            ps.setInt(1, order.getId());
-//            ps.setInt(2, order.getUser().getUserId());
-//            ps.setDouble(3, order.getTotalPrice());
-//            ps.execute();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
         return order;
     }
 
@@ -61,12 +53,6 @@ public class OrderRepository {
         return Optional.empty();
     }
 
-    public static List<Order> getOrders() {
-        return orders;
-    }
-
-
-
     public static Optional<Object> getOrderByUserName(String customer) {
         List<Order> orders = OrderRepository.getOrders();
         for (Order order : orders) {
@@ -76,10 +62,6 @@ public class OrderRepository {
         }
         return Optional.empty();
     }
-
-
-
-
 }
 
 

@@ -28,17 +28,7 @@ public class UserRepository {
     public static User save(User user) {
         users.add(user);
         OrderRepository.save(new Order(user));
-
-        Connection conn = SqlHelper.getConnection();
-        try {
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO USER(ID, LOGIN) VALUES (?,?)");
-            ps.setInt(1, user.getUserId());
-            ps.setString(2, user.getName());
-            ps.execute();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        SqlHelper.addUser(user);
         return user;
     }
 
@@ -46,17 +36,13 @@ public class UserRepository {
         return users;
     }
 
-        /**
-     * +
+    /**
      * returns order choosed by name of customer
      *
      * @param customer
      * @return
      */
-
-
     public static Optional<Object> getByName(String customer) {
-//        List<User> users = UserRepository.getUsers();
         for (User user : users) {
             if (user.getName().equals(customer)) {
                 return Optional.of(user);

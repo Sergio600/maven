@@ -15,10 +15,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-
-/**
- * Order service class.
- */
 public class OrderService {
 
     /**
@@ -72,16 +68,6 @@ public class OrderService {
         order.setProducts(products);
         SqlHelper.updateOrderTotalPrice(order);
 
-//        Connection conn = SqlHelper.getConnection();
-//        try {
-//            PreparedStatement ps = conn.prepareStatement("UPDATE ORDERS SET TOTAL_PRICE =? WHERE ID =?");
-//            ps.setDouble(1, order.getTotalPrice());
-//            ps.setInt(2, order.getId());
-//            ps.execute();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
         return order;
     }
 
@@ -99,23 +85,12 @@ public class OrderService {
         } else {
             throw new OrderNotFoundException("Order not found");
         }
+
         List<Product> products = order.getProducts();
         products.remove(index);
         order.setProducts(products);
 
         SqlHelper.updateOrderTotalPrice(order);
-
-//        Connection conn = SqlHelper.getConnection();
-//        try {
-//            PreparedStatement ps = conn.prepareStatement("UPDATE ORDERS SET TOTAL_PRICE =? WHERE ID =?");
-//            ps.setDouble(1, order.getTotalPrice());
-//            ps.setInt(2, order.getId());
-//            ps.execute();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-
 
         return order;
     }

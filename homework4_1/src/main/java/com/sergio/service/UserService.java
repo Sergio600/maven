@@ -14,7 +14,6 @@ public class UserService {
 
         if (UserRepository.getByName(userName).isPresent()) {
             return (User) UserRepository.getByName(userName).get();
-
         } else {
             User user = new User(userName);
             UserRepository.save(user);

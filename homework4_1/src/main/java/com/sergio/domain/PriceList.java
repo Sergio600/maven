@@ -22,6 +22,7 @@ public class PriceList {
 
     private static Map<String, Double> initMap() {
         Map<String, Double> products = new HashMap<>();
+
         Connection connection = SqlHelper.getConnection();
         ResultSet rs=null;
         try {
@@ -29,6 +30,7 @@ public class PriceList {
             rs = st.executeQuery("" +
                     "Select * from good");
             while (rs.next()) {
+//                String productID = rs.getString("title");
                 String productTitle = rs.getString("title");
                 String productPrice = rs.getString("price");
                 products.put(productTitle, Double.parseDouble(productPrice));
@@ -50,12 +52,6 @@ public class PriceList {
                 throwables.printStackTrace();
             }
         }
-
-//		products.put("Book", 30.0);
-//		products.put("TV", 500.0);
-//		products.put("Car", 40000.0);
-//		products.put("Mobile phone", 1000.0);
-//		products.put("Shoes", 100.0);
         return products;
     }
 
