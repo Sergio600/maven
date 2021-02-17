@@ -12,11 +12,12 @@ public class Listener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Hello Listener is works!");
-
+        
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
+
 
     }
 }
