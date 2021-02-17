@@ -1,17 +1,14 @@
 package com.sergio.controller;
 
 import com.sergio.domain.Order;
-import com.sergio.domain.PriceList;
 import com.sergio.domain.User;
-import com.sergio.repository.UserRepository;
+import com.sergio.repository.ProductRepository;
 import com.sergio.service.OrderService;
 import com.sergio.service.UserService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(name = "ProductServlet", urlPatterns = "/chooseproducts")
 public class ProductServlet extends HttpServlet {
@@ -45,7 +42,7 @@ public class ProductServlet extends HttpServlet {
             }
         }
 
-        req.setAttribute("products", PriceList.getPRODUCTS());
+        req.setAttribute("products", ProductRepository.getAllProducts());
         req.setAttribute("order", OrderService.createOrGetOrder(UserService.createOrGetUser(customer)));
         req.getRequestDispatcher("WEB-INF/jsp/chooseproducts.jsp").forward(req, resp);
     }

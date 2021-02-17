@@ -22,6 +22,7 @@ public class SqlHelper {
         }
     }
 
+
     public static void addUser(User user){
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO USER(ID, LOGIN) VALUES (?,?)");
@@ -57,17 +58,17 @@ public class SqlHelper {
         }
     }
 
-    public static void findUser(){
-        try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO ORDERS(ID, USER_ID, TOTAL_PRICE) VALUES (?,?,?)");
-            ps.setInt(1, order.getId());
-            ps.setInt(2, order.getUser().getUserId());
-            ps.setDouble(3, order.getTotalPrice());
-            ps.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void findUser(){
+//        try {
+//            PreparedStatement ps = connection.prepareStatement("INSERT INTO ORDERS(ID, USER_ID, TOTAL_PRICE) VALUES (?,?,?)");
+//            ps.setInt(1, order.getId());
+//            ps.setInt(2, order.getUser().getUserId());
+//            ps.setDouble(3, order.getTotalPrice());
+//            ps.execute();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
 

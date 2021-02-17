@@ -5,7 +5,7 @@ package com.sergio.domain;
  */
 public class Product {
 
-	private int id;
+	private Integer id;
 	private String name;
 	private double price;
 

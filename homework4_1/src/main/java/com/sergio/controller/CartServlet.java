@@ -1,10 +1,8 @@
 package com.sergio.controller;
 
 import com.sergio.domain.Order;
-import com.sergio.domain.User;
 import com.sergio.service.OrderService;
 import com.sergio.service.UserService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

@@ -1,18 +1,14 @@
 package com.sergio.service;
 
 import com.sergio.domain.Order;
-import com.sergio.domain.PriceList;
 import com.sergio.domain.Product;
 import com.sergio.domain.User;
 import com.sergio.exception.InvalidArgumentException;
 import com.sergio.exception.OrderNotFoundException;
 import com.sergio.repository.OrderRepository;
+import com.sergio.repository.ProductRepository;
 import com.sergio.repository.UserRepository;
 import com.sergio.sql.SqlHelper;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 public class OrderService {
@@ -60,7 +56,7 @@ public class OrderService {
 
             Product product = new Product();
             product.setName(productName);
-            product.setPrice(PriceList.getPRODUCTS().get(productName));
+            product.setPrice(ProductRepository.getAllProducts().get(productName));
             products.add(product);
             order.setTotalPrice(calcTotalPrice(order));
         }
