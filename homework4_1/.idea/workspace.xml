@@ -19,6 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="d18ceb26-2f2f-447f-867c-aecb8e7cef48" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/sergio/domain/User.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/sergio/repository/ProductRepository.java" afterDir="false" />
@@ -54,6 +55,9 @@
       <change beforePath="$PROJECT_DIR$/temp/webapp1/jsp/products.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/temp/webapp1/jsp/welcome.jsp" beforeDir="false" />
     </list>
+=======
+    <list default="true" id="d18ceb26-2f2f-447f-867c-aecb8e7cef48" name="Default Changelist" comment="" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
