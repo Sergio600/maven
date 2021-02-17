@@ -3,10 +3,6 @@ package com.sergio.repository;
 import com.sergio.domain.Order;
 import com.sergio.domain.User;
 import com.sergio.sql.SqlHelper;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

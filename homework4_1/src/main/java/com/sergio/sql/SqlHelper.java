@@ -2,10 +2,7 @@ package com.sergio.sql;
 import com.sergio.domain.Order;
 import com.sergio.domain.User;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class SqlHelper {
 
@@ -59,4 +56,21 @@ public class SqlHelper {
             e.printStackTrace();
         }
     }
+
+    public static void findUser(){
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO ORDERS(ID, USER_ID, TOTAL_PRICE) VALUES (?,?,?)");
+            ps.setInt(1, order.getId());
+            ps.setInt(2, order.getUser().getUserId());
+            ps.setDouble(3, order.getTotalPrice());
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
 }
