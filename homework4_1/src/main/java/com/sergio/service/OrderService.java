@@ -4,11 +4,16 @@ import com.sergio.domain.Order;
 import com.sergio.domain.Product;
 import com.sergio.domain.User;
 import com.sergio.exception.InvalidArgumentException;
-import com.sergio.exception.OrderNotFoundException;
 import com.sergio.repository.OrderRepository;
 import com.sergio.repository.ProductRepository;
 import com.sergio.repository.UserRepository;
 import com.sergio.sql.SqlHelper;
+import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class OrderService {
@@ -24,11 +29,25 @@ public class OrderService {
             throw new InvalidArgumentException("Name can't be null");
         }
 
-        if (UserRepository.getByName(user.getName()).isPresent()) {
-            return (Order) OrderRepository.getOrderByUserName(user.getName()).get();
+        Connection connection = SqlHelper.getConnection();
+        Order order=null;
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * from orders where user_id ='?'");
+            ps.setInt(1,user.getUserId());
+            ps.execute();
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                order.setId(rs.getInt(1));
+                order.getUser().setUserId(rs.getInt(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+        if (order.getId()!=0) {
+            return OrderRepository.getByUser(user);
         } else {
-            Order order = OrderRepository.save(new Order(user));
+            order = new Order(user);
             return order;
         }
     }
@@ -36,33 +55,24 @@ public class OrderService {
     /**
      * Adds product to order.
      *
-     * @param id               order id.
+     * @param user               order id.
      * @param selectedProducts string array of product keys from product map.
      * @return order with saved order.
      */
-    public static Order addProducts(String id, String[] selectedProducts) {
-        if (id == null || selectedProducts == null) {
+    public static Order addProducts(User user, String[] selectedProducts) {
+        if (user == null || selectedProducts == null) {
             throw new InvalidArgumentException("Arguments cant be null");
         }
-        Order order;
-        if (OrderRepository.getById(id).isPresent()) {
-            order = OrderRepository.getById(id).get();
-        } else {
-            throw new OrderNotFoundException("Order not found");
-        }
 
+        Order order = user.getOrder();
         List<Product> products = order.getProducts();
-        for (String productName : selectedProducts) {
-
-            Product product = new Product();
-            product.setName(productName);
-            product.setPrice(ProductRepository.getAllProducts().get(productName));
-            products.add(product);
-            order.setTotalPrice(calcTotalPrice(order));
-        }
-
+        String productTitle = selectedProducts[0];
+        Product product = new Product();
+        product.setName(productTitle);
+        product.setPrice(ProductRepository.getAllProducts().get(productTitle));
+        products.add(product);
         order.setProducts(products);
-        SqlHelper.updateOrderTotalPrice(order);
+        order.setTotalPrice(calcTotalPrice(order));
 
         return order;
     }
@@ -70,23 +80,26 @@ public class OrderService {
     /**
      * Removes product from order
      *
-     * @param id
+     * @param user
      * @param index
      * @return order with removed product
      */
-    public static Order removeProduct(String id, int index) {
-        Order order;
-        if (OrderRepository.getById(id).isPresent()) {
-            order = OrderRepository.getById(id).get();
-        } else {
-            throw new OrderNotFoundException("Order not found");
+    public static Order removeProduct(User user, int index) {
+        if (user == null) {
+            throw new InvalidArgumentException("Arguments cant be null");
         }
 
+        Order order = user.getOrder();
         List<Product> products = order.getProducts();
         products.remove(index);
+
         order.setProducts(products);
+        order.setTotalPrice(calcTotalPrice(order));
 
         SqlHelper.updateOrderTotalPrice(order);
+
+
+
 
         return order;
     }

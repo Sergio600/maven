@@ -1,17 +1,12 @@
 package com.sergio.domain;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class User {
-    private static AtomicInteger count = new AtomicInteger(0);
-
     private int userId;
     private String name;
-    private String paswsword;
+    private String password;
     private Order order;
 
     public User(String name) {
-        this.userId = count.incrementAndGet();
         this.name = name;
     }
 
@@ -23,11 +18,11 @@ public class User {
         this.order = order;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -39,11 +34,11 @@ public class User {
         this.name = name;
     }
 
-    public String getPaswsword() {
-        return paswsword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPaswsword(String paswsword) {
-        this.paswsword = paswsword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

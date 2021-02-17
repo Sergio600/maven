@@ -35,10 +35,10 @@ public class ProductServlet extends HttpServlet {
          */
         if (req.getParameter("remove") != null) {
             int indexToRemoveProduct = Integer.parseInt(req.getParameter("remove"));
-            OrderService.removeProduct(order.getId() + "", indexToRemoveProduct);
+            OrderService.removeProduct(order.getUser(), indexToRemoveProduct);
         } else {
             if (req.getParameterValues("selected") != null) {
-                OrderService.addProducts(order.getId() + "", req.getParameterValues("selected"));
+                OrderService.addProducts(order.getUser(), req.getParameterValues("selected"));
             }
         }
 

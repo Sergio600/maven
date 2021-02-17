@@ -1,10 +1,13 @@
 package com.sergio.repository;
 
 import com.sergio.domain.Order;
+import com.sergio.domain.User;
+import com.sergio.service.UserService;
 import com.sergio.sql.SqlHelper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,14 +19,6 @@ import java.util.Optional;
  */
 public class OrderRepository {
 
-    private static List<Order> orders = Collections.synchronizedList(new ArrayList<>());
-
-    private OrderRepository() {
-    }
-
-    public static List<Order> getOrders() {
-        return orders;
-    }
 
     /**
      * Saves order in "data base" (list of orders).
@@ -32,36 +27,53 @@ public class OrderRepository {
      * @return saved order.
      */
     public static Order save(Order order) {
+        Connection connection = SqlHelper.getConnection();
 
-        orders.add(order);
-        SqlHelper.addNewOrder(order);
+        PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement("INSERT INTO ORDER(USER_ID, TOTAL_PRICE) VALUES (?,?)");
+            ps.setInt(1, order.getUser().getUserId());
+            ps.setDouble(2, order.getTotalPrice());
+            ps.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return order;
     }
 
     /**
      * Returns order by id if order is exist.
      *
-     * @param id order id.
+     * @param user order id.
      * @return order by id if order is exist.
      */
-    public static Optional<Order> getById(String id) {
-        for (Order order : orders) {
-            if (order.getId() == (Integer.parseInt(id))) {
-                return Optional.of(order);
-            }
+    public static Order getByUser(User user) {
+        Connection connection = SqlHelper.getConnection();
+        Order order = null;
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * from orders where user_id ='?'");
+            ps.setInt(1, user.getUserId());
+            ps.execute();
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                order.setId(rs.getInt(1));
+                order.getUser().setUserId(rs.getInt(2));
+                }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return Optional.empty();
+        return order;
     }
 
-    public static Optional<Object> getOrderByUserName(String customer) {
-        List<Order> orders = OrderRepository.getOrders();
-        for (Order order : orders) {
-            if (order.getUser().getName().equals(customer)) {
-                return Optional.of(order);
-            }
-        }
-        return Optional.empty();
-    }
+//    public static Optional<Object> getOrderByUserName(String customer) {
+//        List<Order> orders = OrderRepository.getOrders();
+//        for (Order order : orders) {
+//            if (order.getUser().getName().equals(customer)) {
+//                return Optional.of(order);
+//            }
+//        }
+//        return Optional.empty();
+//    }
 }
 
 

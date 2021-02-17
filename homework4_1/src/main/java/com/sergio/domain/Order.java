@@ -9,20 +9,21 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Order {
 
-	private static AtomicInteger count = new AtomicInteger(0);
-
-	private int id;
+	private Integer id;
 	private User user;
 	private List<Product> products = new ArrayList<>();
 	private double totalPrice;
 
 	public Order(User user) {
 		this.user = user;
-		this.id = count.incrementAndGet();
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public double getTotalPrice() {
@@ -31,6 +32,10 @@ public class Order {
 
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public User getUser() {

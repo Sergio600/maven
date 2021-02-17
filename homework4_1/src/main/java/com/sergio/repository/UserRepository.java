@@ -1,19 +1,17 @@
 package com.sergio.repository;
 
-import com.sergio.domain.Order;
 import com.sergio.domain.User;
 import com.sergio.sql.SqlHelper;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 public class UserRepository {
-
-    private static List<User> users = Collections.synchronizedList(new ArrayList<>());
-
-    private UserRepository() {
-    }
 
     /**
      * Adds user to users, and to Data Base
@@ -22,28 +20,45 @@ public class UserRepository {
      * @return
      */
     public static User save(User user) {
-        users.add(user);
-        OrderRepository.save(new Order(user));
-        SqlHelper.addUser(user);
+        Connection connection = SqlHelper.getConnection();
+
+        PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement("INSERT INTO USER(LOGIN) VALUES (?)");
+            ps.setString(1, user.getName());
+            ps.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         return user;
     }
 
-    public static List<User> getUsers() {
-        return users;
-    }
 
     /**
      * returns order choosed by name of customer
      *
-     * @param customer
+     * @param userId
      * @return
      */
-    public static Optional<Object> getByName(String customer) {
-        for (User user : users) {
-            if (user.getName().equals(customer)) {
-                return Optional.of(user);
+    public static User getByID(int userId) {
+        Connection connection = SqlHelper.getConnection();
+        User user=null;
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * from user where id ='?'");
+            ps.setInt(1,userId);
+            ps.execute();
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                user.setUserId(rs.getInt(1));
+                user.setName(rs.getString(2));
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return Optional.empty();
+
+//        user.setOrder(OrderRepository.getOrderByUserName(userName));
+
+        return user;
     }
 }
