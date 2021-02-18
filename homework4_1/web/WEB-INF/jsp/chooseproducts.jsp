@@ -10,8 +10,8 @@
      </style>
 
 
+ <%Order order = OrderService.createOrGetOrder(UserService.createOrGetUser(session.getAttribute("customer").toString()));%>
 
-    <%Order order = OrderService.createOrGetOrder(UserService.createOrGetUser(session.getAttribute("customer").toString()));%>
 
 <html lang="en">
 

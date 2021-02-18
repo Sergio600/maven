@@ -14,6 +14,8 @@ public class Order {
 	private List<Product> products = new ArrayList<>();
 	private double totalPrice;
 
+	public Order(){}
+
 	public Order(User user) {
 		this.user = user;
 	}

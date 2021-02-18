@@ -20,26 +20,23 @@ public class UserService {
         }
 
         Connection connection = SqlHelper.getConnection();
-        User user=null;
+        User user = new User();
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * from user where name ='?'");
-            ps.setString(1,userName);
-            ps.execute();
+            PreparedStatement ps = connection.prepareStatement("SELECT * from user where LOGIN=?;");
+            ps.setString(1, userName);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-                user.setUserId(rs.getInt(1));
-                user.setName(rs.getString(2));
+
+            if (rs.next()) {
+                user.setUserId(rs.getInt("ID"));
+                user.setName(userName);
+            } else {
+                user = new User(userName);
+                UserRepository.save(user);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-        if (user.getName()!=null) {
-            return UserRepository.getByName(userName);
-        } else {
-            user = new User(userName);
-            return user;
-        }
+        return user;
     }
 }

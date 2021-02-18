@@ -5,6 +5,8 @@ import com.sergio.domain.User;
 import com.sergio.repository.ProductRepository;
 import com.sergio.service.OrderService;
 import com.sergio.service.UserService;
+import com.sergio.sql.SqlHelper;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -38,12 +40,19 @@ public class ProductServlet extends HttpServlet {
             OrderService.removeProduct(order.getUser(), indexToRemoveProduct);
         } else {
             if (req.getParameterValues("selected") != null) {
-                OrderService.addProducts(order.getUser(), req.getParameterValues("selected"));
+//                System.out.println(req.getParameterValues("selected")[0]);   works
+//                System.out.println(user.getName());
+
+                SqlHelper.showUsers();
+                SqlHelper.showOrders();
+
+
+                OrderService.addProducts(order, req.getParameterValues("selected"));
             }
         }
 
         req.setAttribute("products", ProductRepository.getAllProducts());
-        req.setAttribute("order", OrderService.createOrGetOrder(UserService.createOrGetUser(customer)));
+        req.setAttribute("order", order);
         req.getRequestDispatcher("WEB-INF/jsp/chooseproducts.jsp").forward(req, resp);
     }
 }

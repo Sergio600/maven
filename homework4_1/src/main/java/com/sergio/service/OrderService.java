@@ -6,10 +6,7 @@ import com.sergio.domain.User;
 import com.sergio.exception.InvalidArgumentException;
 import com.sergio.repository.OrderRepository;
 import com.sergio.repository.ProductRepository;
-import com.sergio.repository.UserRepository;
 import com.sergio.sql.SqlHelper;
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,49 +27,77 @@ public class OrderService {
         }
 
         Connection connection = SqlHelper.getConnection();
-        Order order=null;
+        Order order = new Order();
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * from orders where user_id ='?'");
-            ps.setInt(1,user.getUserId());
-            ps.execute();
+            PreparedStatement ps = connection.prepareStatement("" +
+                    "SELECT ORDERS.ID, USER.ID, USER.LOGIN, ORDERS.TOTAL_PRICE \n" +
+                    "FROM ORDERS \n" +
+                    "INNER JOIN USER\n" +
+                    "ON USER.ID=ORDERS.USER_ID\n" +
+                    "WHERE ORDERS.USER_ID=?;");
+            ps.setInt(1, user.getUserId());
+
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+            if (rs.next()) {
                 order.setId(rs.getInt(1));
-                order.getUser().setUserId(rs.getInt(2));
+                order.setTotalPrice(rs.getDouble(4));
+
+                User user1 = new User();
+                user1.setUserId(rs.getInt(2));
+                user1.setName(rs.getString(3));
+
+                order.setUser(user1);
+            } else {
+                order = new Order(user);
+                try {
+                    ps = connection.prepareStatement("INSERT INTO ORDERS(USER_ID) VALUES (?)");
+                    ps.setInt(1, order.getUser().getUserId());
+                    ps.execute();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        if (order.getId()!=0) {
-            return OrderRepository.getByUser(user);
-        } else {
-            order = new Order(user);
-            return order;
-        }
+        return order;
     }
+
 
     /**
      * Adds product to order.
      *
-     * @param user               order id.
+     * @param order            order id.
      * @param selectedProducts string array of product keys from product map.
      * @return order with saved order.
      */
-    public static Order addProducts(User user, String[] selectedProducts) {
-        if (user == null || selectedProducts == null) {
+    public static Order addProducts(Order order, String[] selectedProducts) {
+        if (order == null || selectedProducts == null) {
             throw new InvalidArgumentException("Arguments cant be null");
         }
 
-        Order order = user.getOrder();
-        List<Product> products = order.getProducts();
         String productTitle = selectedProducts[0];
+        int productId = ProductRepository.getProductIdByTitle(productTitle);
+
         Product product = new Product();
+        product.setId(productId);
         product.setName(productTitle);
         product.setPrice(ProductRepository.getAllProducts().get(productTitle));
-        products.add(product);
-        order.setProducts(products);
-        order.setTotalPrice(calcTotalPrice(order));
+
+
+        Connection connection = SqlHelper.getConnection();
+        PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement("INSERT INTO ORDER_GOOD(ORDER_ID, GOOD_ID) VALUES (?,?)");
+            ps.setInt(1, order.getId());
+            ps.setInt(2, product.getId());
+            ps.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        OrderRepository.updateOrderTotalPrice(order);
 
         return order;
     }
@@ -97,8 +122,6 @@ public class OrderService {
         order.setTotalPrice(calcTotalPrice(order));
 
         SqlHelper.updateOrderTotalPrice(order);
-
-
 
 
         return order;

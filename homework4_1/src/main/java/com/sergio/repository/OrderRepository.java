@@ -41,39 +41,21 @@ public class OrderRepository {
         return order;
     }
 
-    /**
-     * Returns order by id if order is exist.
-     *
-     * @param user order id.
-     * @return order by id if order is exist.
-     */
-    public static Order getByUser(User user) {
+    public static Order updateOrderTotalPrice(Order order){
         Connection connection = SqlHelper.getConnection();
-        Order order = null;
+        PreparedStatement ps = null;
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * from orders where user_id ='?'");
-            ps.setInt(1, user.getUserId());
+            ps = connection.prepareStatement("UPDATE ORDERS SET TOTAL_PRICE = ? WHERE ID=?;");
+            ps.setDouble(1, order.getTotalPrice());
+            ps.setInt(2, order.getId());
             ps.execute();
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                order.setId(rs.getInt(1));
-                order.getUser().setUserId(rs.getInt(2));
-                }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return order;
     }
-
-//    public static Optional<Object> getOrderByUserName(String customer) {
-//        List<Order> orders = OrderRepository.getOrders();
-//        for (Order order : orders) {
-//            if (order.getUser().getName().equals(customer)) {
-//                return Optional.of(order);
-//            }
-//        }
-//        return Optional.empty();
-//    }
 }
+
+
 
 

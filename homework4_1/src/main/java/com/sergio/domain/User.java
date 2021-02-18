@@ -6,6 +6,8 @@ public class User {
     private String password;
     private Order order;
 
+    public User(){}
+
     public User(String name) {
         this.name = name;
     }

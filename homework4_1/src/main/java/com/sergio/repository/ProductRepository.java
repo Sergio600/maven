@@ -76,7 +76,7 @@ public class ProductRepository {
      * @param productTitle
      * @return
      */
-    public static int getIdByProductTitle(String productTitle) {
+    public static int getProductIdByTitle(String productTitle) {
         int productId = -1;
         Connection connection = SqlHelper.getConnection();
         ResultSet rs = null;
@@ -94,14 +94,6 @@ public class ProductRepository {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
         }
 
         return productId;
