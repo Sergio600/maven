@@ -14,7 +14,7 @@
 
 
  <%Order order = OrderService.createOrGetOrder(UserService.createOrGetUser(session.getAttribute("customer").toString()));%>
- <%List<Product> orderProducts = order.getProducts();%>
+
 
 <html lang="en">
 
@@ -32,8 +32,9 @@
 
 
         <div>
-            <form method="post" id="addprod" action="chooseproducts">
 
+<!-- ФОРМА SELECT ВЫБОР ПРОДУКТОВ  -->
+            <form method="post" id="addprod" action="chooseproducts">
                 <select name="selected" size="1">
                     <c:forEach var="product" items="${products}">
                         <option value="${product.key}"> ${product.key} (${product.value}$) </option>
@@ -45,6 +46,7 @@
 
             </form>
 
+<!-- ФОРМА ДЛЯ КНОПОК SUBMIT И EXIT  -->
             <form method="POST" id="addprod" action="cart">
                   <input type="submit" value="submit"></input>
                   <input type="submit" name="exit" value="exit"></input>
@@ -52,11 +54,13 @@
                   <input type="hidden" name="customer" value="<%=order.getUser().getName()%>"></input>
              </form>
 
+
+<!-- ФОРМА ОТОБРАЖЕНИЯ ВЫБРАННЫХ ПРОДУКТОВ -->
             <div>
              <% int index =0; %>
                 <c:forEach var="pickedProduct" items="${order.getProducts()}">
                     <p> ${pickedProduct.getName()} ${pickedProduct.getPrice()}</p>
-                     <button type="submit" value="${pickedProduct.getId()}>" name="remove" form="addprod">remove</button>
+                     <button type="submit" value="${pickedProduct.getId()}" name="remove" form="addprod"> remove </button>
                 </c:forEach>
             </div>
 

@@ -1,6 +1,7 @@
 package com.sergio.controller;
 
 import com.sergio.domain.Order;
+import com.sergio.domain.User;
 import com.sergio.service.OrderService;
 import com.sergio.service.UserService;
 import javax.servlet.ServletException;
@@ -19,14 +20,20 @@ public class CartServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String customer;
 
+
         if(req.getParameter("exit")!=null){
             session.invalidate();
             req.getRequestDispatcher("WEB-INF/jsp/welcome.jsp").forward(req, resp);
             return;
         }
-
         customer = req.getParameter("customer");
-        Order order = OrderService.createOrGetOrder(UserService.createOrGetUser(customer));
+
+        User user = UserService.createOrGetUser(customer);
+        Order order = OrderService.createOrGetOrder(user);
+
+        System.out.println(order.getUser().getName());
+        System.out.println(order.getId());
+
         req.setAttribute("order", order);
         req.getRequestDispatcher("WEB-INF/jsp/cart.jsp").forward(req, resp);
     }

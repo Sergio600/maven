@@ -37,7 +37,9 @@ public class ProductServlet extends HttpServlet {
          * if its != null than call method removeProduct to remove by index of product
          */
         if (req.getParameter("remove") != null) {
+
             int idToRemoveProduct = Integer.parseInt(req.getParameter("remove"));
+            System.out.println("Remove product with id:" + idToRemoveProduct);
             order = OrderService.removeProduct(order, idToRemoveProduct);
         } else {
             if (req.getParameterValues("selected") != null) {

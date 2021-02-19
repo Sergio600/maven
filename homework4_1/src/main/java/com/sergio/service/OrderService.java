@@ -118,7 +118,8 @@ public class OrderService {
         try {
             ps = connection.prepareStatement("" +
                     "DELETE FROM ORDER_GOOD " +
-                    "WHERE ORDER_ID=? AND GOOD_ID=?");
+                    "WHERE ORDER_ID=? AND GOOD_ID=? " +
+                    "LIMIT 1");
             ps.setInt(1, order.getId());
             ps.setInt(2, idToRemoveProduct);
             ps.execute();

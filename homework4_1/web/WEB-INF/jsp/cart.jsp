@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 <%@ page import="com.sergio.domain.Order"%>
 <%@ page import="com.sergio.domain.User"%>
-<%@ page import="com.sergio.repository.OrderRepository"%>
+<%@ page import="com.sergio.domain.Product"%>
 <%@ page import="com.sergio.service.OrderService"%>
 <%@ page import="com.sergio.service.UserService"%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <style>
@@ -11,6 +12,9 @@
     </style>
 
  <%Order order = OrderService.createOrGetOrder(UserService.createOrGetUser(session.getAttribute("customer").toString()));%>
+
+
+
 
 <html lang="en">
 
@@ -22,15 +26,13 @@
 
 <body>
 <div class="container">
+
     <div class="header">Dear, <%=order.getUser().getName()%>, your order is: </div>
 
-    <% int index =0; %>
-
+     <% int index =0; %>
      <c:forEach var="pickedProduct" items="${order.getProducts()}">
            <p> <%= ++index %>) ${pickedProduct.getName()} ${pickedProduct.getPrice()}$</p>
-
      </c:forEach>
-
 
     <div class="totalPrice">Total price is: <%=order.getTotalPrice()%>$</div>
 
