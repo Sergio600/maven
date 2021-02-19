@@ -147,7 +147,7 @@ public class SqlHelper {
 
     public static void showOrdersGood(){
         try {
-            PreparedStatement ps = connection.prepareStatement("Select * from orders_good;");
+            PreparedStatement ps = connection.prepareStatement("Select * from order_good;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 System.out.print("Order_good: ");

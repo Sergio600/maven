@@ -1,6 +1,7 @@
 package com.sergio.repository;
 
 import com.sergio.domain.Order;
+import com.sergio.domain.Product;
 import com.sergio.domain.User;
 import com.sergio.service.UserService;
 import com.sergio.sql.SqlHelper;
@@ -31,10 +32,16 @@ public class OrderRepository {
 
         PreparedStatement ps = null;
         try {
-            ps = connection.prepareStatement("INSERT INTO ORDER(USER_ID, TOTAL_PRICE) VALUES (?,?)");
+            ps = connection.prepareStatement("INSERT INTO ORDERS(USER_ID) VALUES (?)");
             ps.setInt(1, order.getUser().getUserId());
-            ps.setDouble(2, order.getTotalPrice());
             ps.execute();
+
+            ps = connection.prepareStatement("SELECT * from ORDERS where USER_ID=?;");
+            ps.setInt(1, order.getUser().getUserId());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                order.setId(rs.getInt("ID"));
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -42,16 +49,24 @@ public class OrderRepository {
     }
 
     public static Order updateOrderTotalPrice(Order order){
+
+        List<Product> products = order.getProducts();
+        double totalPrice=0;
+        for (Product product: products) {
+            totalPrice+=product.getPrice();
+        }
+
         Connection connection = SqlHelper.getConnection();
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement("UPDATE ORDERS SET TOTAL_PRICE = ? WHERE ID=?;");
-            ps.setDouble(1, order.getTotalPrice());
+            ps.setDouble(1, totalPrice);
             ps.setInt(2, order.getId());
             ps.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
         return order;
     }
 }

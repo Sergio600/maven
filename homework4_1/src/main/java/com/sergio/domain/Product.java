@@ -5,11 +5,11 @@ package com.sergio.domain;
  */
 public class Product {
 
-	private Integer id;
+	private int id;
 	private String name;
 	private double price;
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 

@@ -2,7 +2,6 @@ package com.sergio.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Class that represents POJO of order.
@@ -11,10 +10,19 @@ public class Order {
 
 	private Integer id;
 	private User user;
+	private int userID;
 	private List<Product> products = new ArrayList<>();
 	private double totalPrice;
 
 	public Order(){}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
 
 	public Order(User user) {
 		this.user = user;

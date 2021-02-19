@@ -7,6 +7,7 @@ import com.sergio.exception.InvalidArgumentException;
 import com.sergio.repository.OrderRepository;
 import com.sergio.repository.ProductRepository;
 import com.sergio.sql.SqlHelper;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,8 +39,10 @@ public class OrderService {
             ps.setInt(1, user.getUserId());
 
             ResultSet rs = ps.executeQuery();
+
             if (rs.next()) {
                 order.setId(rs.getInt(1));
+                order.setUserID(rs.getInt(2));
                 order.setTotalPrice(rs.getDouble(4));
 
                 User user1 = new User();
@@ -47,17 +50,12 @@ public class OrderService {
                 user1.setName(rs.getString(3));
 
                 order.setUser(user1);
+
             } else {
                 order = new Order(user);
-                try {
-                    ps = connection.prepareStatement("INSERT INTO ORDERS(USER_ID) VALUES (?)");
-                    ps.setInt(1, order.getUser().getUserId());
-                    ps.execute();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-
+                order = OrderRepository.save(order);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -97,7 +95,8 @@ public class OrderService {
             throwables.printStackTrace();
         }
 
-        OrderRepository.updateOrderTotalPrice(order);
+        order.setProducts(ProductRepository.getProductsByOrder(order));
+        order = OrderRepository.updateOrderTotalPrice(order);
 
         return order;
     }
@@ -105,24 +104,32 @@ public class OrderService {
     /**
      * Removes product from order
      *
-     * @param user
-     * @param index
+     * @param order
+     * @param idToRemoveProduct
      * @return order with removed product
      */
-    public static Order removeProduct(User user, int index) {
-        if (user == null) {
+    public static Order removeProduct(Order order, int idToRemoveProduct) {
+        if (order == null) {
             throw new InvalidArgumentException("Arguments cant be null");
         }
 
-        Order order = user.getOrder();
-        List<Product> products = order.getProducts();
-        products.remove(index);
+        Connection connection = SqlHelper.getConnection();
+        PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement("" +
+                    "DELETE FROM ORDER_GOOD " +
+                    "WHERE ORDER_ID=? AND GOOD_ID=?");
+            ps.setInt(1, order.getId());
+            ps.setInt(2, idToRemoveProduct);
+            ps.execute();
 
-        order.setProducts(products);
-        order.setTotalPrice(calcTotalPrice(order));
 
-        SqlHelper.updateOrderTotalPrice(order);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
+        order.setProducts(ProductRepository.getProductsByOrder(order));
+        order = OrderRepository.updateOrderTotalPrice(order);
 
         return order;
     }

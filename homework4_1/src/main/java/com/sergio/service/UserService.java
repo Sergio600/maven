@@ -31,7 +31,7 @@ public class UserService {
                 user.setName(userName);
             } else {
                 user = new User(userName);
-                UserRepository.save(user);
+                user = UserRepository.save(user);
             }
 
         } catch (SQLException e) {

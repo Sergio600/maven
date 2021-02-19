@@ -5,6 +5,7 @@ import com.sergio.sql.SqlHelper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -24,17 +25,12 @@ public class UserRepository {
             ps.setString(1, user.getName());
             ps.execute();
 
-
-//            System.out.println("Пользователь добавлен в базу!");
-//
-//            ps =connection.prepareStatement("Select * from user where login='sergio';");
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()){
-//                System.out.println(rs.getInt(1));
-//                System.out.println(rs.getString(2));
-//                }
-
-
+            ps = connection.prepareStatement("SELECT * from user where LOGIN=?;");
+            ps.setString(1, user.getName());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                user.setUserId(rs.getInt(1));
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

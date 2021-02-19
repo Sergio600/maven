@@ -28,28 +28,27 @@ public class ProductServlet extends HttpServlet {
         }
 
         User user = UserService.createOrGetUser((customer));
-
         Order order = OrderService.createOrGetOrder(user);
+
+
 
         /**
          * Check request parameter remove
          * if its != null than call method removeProduct to remove by index of product
          */
         if (req.getParameter("remove") != null) {
-            int indexToRemoveProduct = Integer.parseInt(req.getParameter("remove"));
-            OrderService.removeProduct(order.getUser(), indexToRemoveProduct);
+            int idToRemoveProduct = Integer.parseInt(req.getParameter("remove"));
+            order = OrderService.removeProduct(order, idToRemoveProduct);
         } else {
             if (req.getParameterValues("selected") != null) {
-//                System.out.println(req.getParameterValues("selected")[0]);   works
-//                System.out.println(user.getName());
+                order = OrderService.addProducts(order, req.getParameterValues("selected"));
 
-                SqlHelper.showUsers();
-                SqlHelper.showOrders();
-
-
-                OrderService.addProducts(order, req.getParameterValues("selected"));
             }
         }
+
+        SqlHelper.showUsers();
+        SqlHelper.showOrders();
+        SqlHelper.showOrdersGood();
 
         req.setAttribute("products", ProductRepository.getAllProducts());
         req.setAttribute("order", order);
