@@ -4,6 +4,8 @@
 <%@ page import="com.sergio.domain.Product"%>
 <%@ page import="com.sergio.service.OrderService"%>
 <%@ page import="com.sergio.service.UserService"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,10 +13,9 @@
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
 
- <%Order order = OrderService.createOrGetOrder(UserService.createOrGetUser(session.getAttribute("customer").toString()));%>
+ <%User user = UserService.createOrGetUser(session.getAttribute("customer").toString());%>
 
-
-
+  <%Order order = OrderService.createOrGetOrder(user);%>
 
 <html lang="en">
 
@@ -27,7 +28,9 @@
 <body>
 <div class="container">
 
-    <div class="header">Dear, <%=order.getUser().getName()%>, your order is: </div>
+    <div class="header">Dear, <%=user.getName()%>, your order is: </div>
+
+<!-- ФОРМА ОТОБРАЖЕНИЯ ВЫБРАННЫХ ПРОДУКТОВ -->
 
      <% int index =0; %>
      <c:forEach var="pickedProduct" items="${order.getProducts()}">
@@ -36,7 +39,7 @@
 
     <div class="totalPrice">Total price is: <%=order.getTotalPrice()%>$</div>
 
-    <form method="POST" action="/homework4_1">
+    <form method="POST" action="chooseproducts">
            <input type="submit" name="add" value="Edit cart"></input>
     </form>
 

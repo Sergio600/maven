@@ -4,6 +4,8 @@
 <%@ page import="com.sergio.domain.Product"%>
 <%@ page import="com.sergio.service.OrderService"%>
 <%@ page import="com.sergio.service.UserService"%>
+<%@ page import="com.sergio.repository.ProductRepository"%>
+
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 
@@ -13,7 +15,11 @@
      </style>
 
 
- <%Order order = OrderService.createOrGetOrder(UserService.createOrGetUser(session.getAttribute("customer").toString()));%>
+ <%User user = UserService.createOrGetUser(session.getAttribute("customer").toString());%>
+
+ <%Order order = OrderService.createOrGetOrder(user);%>
+
+
 
 
 <html lang="en">
@@ -26,7 +32,7 @@
 
 <body>
     <div class="container">
-        <div class="header">Welcome, <%=order.getUser().getName()%>!!!</div>
+        <div class="header">Welcome, <%=user.getName()%>!!!</div>
         </br>
         <div>Make your order!</div>
 
@@ -43,7 +49,6 @@
 
                 <input type="hidden" name="id" value="<%=order.getId()%>"></input>
                 <input type="submit" name="additem" value="add item"></input>
-
             </form>
 
 <!-- ФОРМА ДЛЯ КНОПОК SUBMIT И EXIT  -->
@@ -51,7 +56,7 @@
                   <input type="submit" value="submit"></input>
                   <input type="submit" name="exit" value="exit"></input>
                   <input type="hidden" name="id" value="<%=order.getId()%>"></input>
-                  <input type="hidden" name="customer" value="<%=order.getUser().getName()%>"></input>
+                  <input type="hidden" name="customer" value="<%=user.getName()%>"></input>
              </form>
 
 
@@ -63,9 +68,7 @@
                      <button type="submit" value="${pickedProduct.getId()}" name="remove" form="addprod"> remove </button>
                 </c:forEach>
             </div>
-
         </div>
-
     </div>
 </body>
 

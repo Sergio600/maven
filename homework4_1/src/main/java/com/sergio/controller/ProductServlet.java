@@ -48,6 +48,9 @@ public class ProductServlet extends HttpServlet {
             }
         }
 
+        order.setProducts(ProductRepository.getProductsByOrder(order));
+        OrderService.printProducts(order);
+
         SqlHelper.showUsers();
         SqlHelper.showOrders();
         SqlHelper.showOrdersGood();

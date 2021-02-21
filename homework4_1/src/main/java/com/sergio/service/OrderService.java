@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderService {
@@ -147,5 +148,15 @@ public class OrderService {
             totalPrice += product.getPrice();
         }
         return totalPrice;
+    }
+
+
+    public static void printProducts(Order order){
+        System.out.println("Количество продуктов: " + order.getProducts().size());
+        for (Product product: order.getProducts()){
+
+            System.out.print(product.getName()+" ");
+
+        }
     }
 }

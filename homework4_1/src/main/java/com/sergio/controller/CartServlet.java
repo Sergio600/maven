@@ -2,6 +2,8 @@ package com.sergio.controller;
 
 import com.sergio.domain.Order;
 import com.sergio.domain.User;
+import com.sergio.repository.OrderRepository;
+import com.sergio.repository.ProductRepository;
 import com.sergio.service.OrderService;
 import com.sergio.service.UserService;
 import javax.servlet.ServletException;
@@ -30,9 +32,7 @@ public class CartServlet extends HttpServlet {
 
         User user = UserService.createOrGetUser(customer);
         Order order = OrderService.createOrGetOrder(user);
-
-        System.out.println(order.getUser().getName());
-        System.out.println(order.getId());
+        order.setProducts(ProductRepository.getProductsByOrder(order));
 
         req.setAttribute("order", order);
         req.getRequestDispatcher("WEB-INF/jsp/cart.jsp").forward(req, resp);

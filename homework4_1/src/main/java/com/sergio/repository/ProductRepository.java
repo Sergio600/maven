@@ -33,6 +33,7 @@ public class ProductRepository {
 
                 products.add(product);
             }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
