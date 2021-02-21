@@ -7,19 +7,15 @@ import com.sergio.exception.InvalidArgumentException;
 import com.sergio.repository.OrderRepository;
 import com.sergio.repository.ProductRepository;
 import com.sergio.sql.SqlHelper;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
 
 public class OrderService {
 
-    // убрать получение order в orderRepository
-    //
-
     /**
-     * Creates order and returns saved order.
+     * Creates order or returns saved order.
      *
      * @param user .
      * @return created order.
@@ -28,42 +24,9 @@ public class OrderService {
         if (user == null) {
             throw new InvalidArgumentException("Name can't be null");
         }
-
-        Connection connection = SqlHelper.getConnection();
-        Order order = new Order();
-        try {
-            PreparedStatement ps = connection.prepareStatement("" +
-                    "SELECT ORDERS.ID, USER.ID, USER.LOGIN, ORDERS.TOTAL_PRICE \n" +
-                    "FROM ORDERS \n" +
-                    "INNER JOIN USER\n" +
-                    "ON USER.ID=ORDERS.USER_ID\n" +
-                    "WHERE ORDERS.USER_ID=?;");
-            ps.setInt(1, user.getUserId());
-
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                order.setId(rs.getInt(1));
-                order.setUserID(rs.getInt(2));
-                order.setTotalPrice(rs.getDouble(4));
-
-                User user1 = new User();
-                user1.setUserId(rs.getInt(2));
-                user1.setName(rs.getString(3));
-
-                order.setUser(user1);
-
-            } else {
-                order = new Order(user);
-                order = OrderRepository.save(order);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Order order = OrderRepository.getOrder(user);
         return order;
     }
-
 
     /**
      * Adds product to order.
@@ -83,23 +46,11 @@ public class OrderService {
         Product product = new Product();
         product.setId(productId);
         product.setName(productTitle);
-        product.setPrice(ProductRepository.getAllProducts().get(productTitle));
+        product.setPrice(ProductService.getAllProducts().get(productTitle));
 
-
-        // убрать в orderRepository
-        Connection connection = SqlHelper.getConnection();
-        PreparedStatement ps = null;
-        try {
-            ps = connection.prepareStatement("INSERT INTO ORDER_GOOD(ORDER_ID, GOOD_ID) VALUES (?,?)");
-            ps.setInt(1, order.getId());
-            ps.setInt(2, product.getId());
-            ps.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        order.setProducts(ProductRepository.getProductsByOrder(order));
-        order = OrderRepository.updateOrderTotalPrice(order);
+        OrderRepository.addProduct(product, order);
+        order.setProducts(OrderRepository.getProductsByOrder(order));
+        updateOrderTotalPrice(order);
 
         return order;
     }
@@ -108,57 +59,42 @@ public class OrderService {
      * Removes product from order
      *
      * @param order
-     * @param idToRemoveProduct
+     * @param productId
      * @return order with removed product
      */
-    public static Order removeProduct(Order order, int idToRemoveProduct) {
+    public static Order removeProduct(Order order, int productId) {
         if (order == null) {
             throw new InvalidArgumentException("Arguments cant be null");
         }
 
-        Connection connection = SqlHelper.getConnection();
-        PreparedStatement ps = null;
-        try {
-            ps = connection.prepareStatement("" +
-                    "DELETE FROM ORDER_GOOD " +
-                    "WHERE ORDER_ID=? AND GOOD_ID=? " +
-                    "LIMIT 1");
-            ps.setInt(1, order.getId());
-            ps.setInt(2, idToRemoveProduct);
-            ps.execute();
-
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        order.setProducts(ProductRepository.getProductsByOrder(order));
-        order = OrderRepository.updateOrderTotalPrice(order);
+        OrderRepository.removeProduct(productId, order);
+        order.setProducts(OrderRepository.getProductsByOrder(order));
+        updateOrderTotalPrice(order);
 
         return order;
     }
 
     /**
-     * Calculates total price of order.
+     * Calculates and update total price of order.
      *
      * @param order order for calculation.
      * @return total price.
      */
-    private static double calcTotalPrice(Order order) {
-        double totalPrice = 0.0;
+    public static Order updateOrderTotalPrice(Order order) {
+        double totalPrice = 0;
         for (Product product : order.getProducts()) {
             totalPrice += product.getPrice();
         }
-        return totalPrice;
+        OrderRepository.updateTotalPrice(totalPrice, order);
+
+        return order;
     }
 
 
-    public static void printProducts(Order order){
-        System.out.println("Количество продуктов: " + order.getProducts().size());
-        for (Product product: order.getProducts()){
-
-            System.out.print(product.getName()+" ");
-
-        }
-    }
+//    public static void printProducts(Order order) {
+//        System.out.println("Количество продуктов: " + order.getProducts().size());
+//        for (Product product : order.getProducts()) {
+//            System.out.print(product.getName() + " ");
+//        }
+//    }
 }

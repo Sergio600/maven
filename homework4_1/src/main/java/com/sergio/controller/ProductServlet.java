@@ -2,11 +2,11 @@ package com.sergio.controller;
 
 import com.sergio.domain.Order;
 import com.sergio.domain.User;
+import com.sergio.repository.OrderRepository;
 import com.sergio.repository.ProductRepository;
 import com.sergio.service.OrderService;
+import com.sergio.service.ProductService;
 import com.sergio.service.UserService;
-import com.sergio.sql.SqlHelper;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -30,32 +30,22 @@ public class ProductServlet extends HttpServlet {
         User user = UserService.createOrGetUser((customer));
         Order order = OrderService.createOrGetOrder(user);
 
-
-
         /**
          * Check request parameter remove
          * if its != null than call method removeProduct to remove by index of product
          */
         if (req.getParameter("remove") != null) {
-
             int idToRemoveProduct = Integer.parseInt(req.getParameter("remove"));
-            System.out.println("Remove product with id:" + idToRemoveProduct);
             order = OrderService.removeProduct(order, idToRemoveProduct);
         } else {
             if (req.getParameterValues("selected") != null) {
                 order = OrderService.addProducts(order, req.getParameterValues("selected"));
-
             }
         }
 
-        order.setProducts(ProductRepository.getProductsByOrder(order));
-        OrderService.printProducts(order);
+        order.setProducts(OrderRepository.getProductsByOrder(order));
 
-        SqlHelper.showUsers();
-        SqlHelper.showOrders();
-        SqlHelper.showOrdersGood();
-
-        req.setAttribute("products", ProductRepository.getAllProducts());
+        req.setAttribute("products", ProductService.getAllProducts());
         req.setAttribute("order", order);
         req.getRequestDispatcher("WEB-INF/jsp/chooseproducts.jsp").forward(req, resp);
     }

@@ -32,7 +32,7 @@ public class CartServlet extends HttpServlet {
 
         User user = UserService.createOrGetUser(customer);
         Order order = OrderService.createOrGetOrder(user);
-        order.setProducts(ProductRepository.getProductsByOrder(order));
+        order.setProducts(OrderRepository.getProductsByOrder(order));
 
         req.setAttribute("order", order);
         req.getRequestDispatcher("WEB-INF/jsp/cart.jsp").forward(req, resp);

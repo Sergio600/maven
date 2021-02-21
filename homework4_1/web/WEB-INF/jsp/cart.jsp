@@ -13,9 +13,8 @@
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
 
- <%User user = UserService.createOrGetUser(session.getAttribute("customer").toString());%>
-
-  <%Order order = OrderService.createOrGetOrder(user);%>
+    <%User user = UserService.createOrGetUser(session.getAttribute("customer").toString());%>
+    <%Order order = OrderService.createOrGetOrder(user);%>
 
 <html lang="en">
 

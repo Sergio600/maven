@@ -19,9 +19,6 @@
 
  <%Order order = OrderService.createOrGetOrder(user);%>
 
-
-
-
 <html lang="en">
 
 <head>

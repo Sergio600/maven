@@ -2,6 +2,7 @@ package com.sergio.controller;
 
 import com.sergio.repository.ProductRepository;
 import com.sergio.service.OrderService;
+import com.sergio.service.ProductService;
 import com.sergio.service.UserService;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,7 @@ public class WelcomeServlet extends HttpServlet {
 
         if (session.getAttribute("customer") != null) {
             String customer = session.getAttribute("customer").toString();
-            req.setAttribute("products", ProductRepository.getAllProducts());
+            req.setAttribute("products", ProductService.getAllProducts());
 
             req.setAttribute("order", OrderService.createOrGetOrder(UserService.createOrGetUser(customer)));
             req.getRequestDispatcher("WEB-INF/jsp/chooseproducts.jsp").forward(req, resp);

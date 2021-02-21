@@ -1,6 +1,4 @@
 package com.sergio.sql;
-import com.sergio.domain.Order;
-import com.sergio.domain.User;
 
 import java.sql.*;
 
@@ -94,58 +92,56 @@ public class SqlHelper {
         }
     }
 
-
-
-    public static void showUsers(){
-        try {
-            PreparedStatement ps = connection.prepareStatement("Select * from user;");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-                System.out.println("USER: ");
-                System.out.print(rs.getInt(1)+ " ");
-                System.out.print(rs.getString(2)+ " ");
-                System.out.println();
-                System.out.println("------------------------");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void showOrders(){
-        try {
-            PreparedStatement ps = connection.prepareStatement("Select * from orders;");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-                System.out.println("ORDER: ");
-                System.out.print(rs.getInt(1)+ " ");
-                System.out.print(rs.getInt(2)+ " ");
-                System.out.print(rs.getDouble(3)+ " ");
-                System.out.println();
-                System.out.println("------------------------");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void showOrdersGood(){
-        try {
-            PreparedStatement ps = connection.prepareStatement("Select * from order_good;");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-                System.out.print("Order_good: ");
-                System.out.print(rs.getInt(1) + " ");
-                System.out.print(rs.getInt(2)+ " ");
-                System.out.print(rs.getInt(3)+ " ");
-                System.out.println();
-                System.out.println("------------------------");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void showUsers(){
+//        try {
+//            PreparedStatement ps = connection.prepareStatement("Select * from user;");
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()){
+//                System.out.println("USER: ");
+//                System.out.print(rs.getInt(1)+ " ");
+//                System.out.print(rs.getString(2)+ " ");
+//                System.out.println();
+//                System.out.println("------------------------");
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public static void showOrders(){
+//        try {
+//            PreparedStatement ps = connection.prepareStatement("Select * from orders;");
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()){
+//                System.out.println("ORDER: ");
+//                System.out.print(rs.getInt(1)+ " ");
+//                System.out.print(rs.getInt(2)+ " ");
+//                System.out.print(rs.getDouble(3)+ " ");
+//                System.out.println();
+//                System.out.println("------------------------");
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public static void showOrdersGood(){
+//        try {
+//            PreparedStatement ps = connection.prepareStatement("Select * from order_good;");
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()){
+//                System.out.print("Order_good: ");
+//                System.out.print(rs.getInt(1) + " ");
+//                System.out.print(rs.getInt(2)+ " ");
+//                System.out.print(rs.getInt(3)+ " ");
+//                System.out.println();
+//                System.out.println("------------------------");
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
