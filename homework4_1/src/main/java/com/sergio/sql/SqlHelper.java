@@ -16,6 +16,8 @@ public class SqlHelper {
 //                    "sergio",
 //                    "12345");
 
+
+            // вынести данные для соединения в проперти файл
             Class.forName("org.h2.Driver");
             return DriverManager
                     .getConnection(
@@ -93,22 +95,6 @@ public class SqlHelper {
     }
 
 
-
-    public static void addUser(User user){
-
-    }
-
-    public static void updateOrderTotalPrice(Order order){
-        try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE ORDERS SET TOTAL_PRICE =? WHERE ID =?");
-            ps.setDouble(1, order.getTotalPrice());
-            ps.setInt(2, order.getId());
-            ps.execute();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void showUsers(){
         try {

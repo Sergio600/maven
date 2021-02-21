@@ -37,37 +37,4 @@ public class UserRepository {
 
         return user;
     }
-
-
-//    /**
-//     * returns order choosed by name of customer
-//     *
-//     * @param userId
-//     * @return
-//     */
-//    public static User getByID(int userId) {
-//        Connection connection = SqlHelper.getConnection();
-//        User user = null;
-//        try {
-//            PreparedStatement ps = connection.prepareStatement("SELECT * from user where id =?");
-//            ps.setInt(1, userId);
-//            ResultSet rs = ps.executeQuery();
-//
-//            if (rs.next()) {
-//                int userID = rs.getInt("ID");
-//                String userName = rs.getString("LOGIN");
-//                user = new User(userName);
-//                user.setUserId(userID);
-//
-//            } else {
-//                System.out.println("Пользователь не найден");
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-
-////        user.setOrder(OrderRepository.getOrderByUserName(userName));
-//
-//        return user;
-//    }
 }

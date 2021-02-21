@@ -7,15 +7,16 @@ import com.sergio.exception.InvalidArgumentException;
 import com.sergio.repository.OrderRepository;
 import com.sergio.repository.ProductRepository;
 import com.sergio.sql.SqlHelper;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class OrderService {
+
+    // убрать получение order в orderRepository
+    //
 
     /**
      * Creates order and returns saved order.
@@ -85,6 +86,7 @@ public class OrderService {
         product.setPrice(ProductRepository.getAllProducts().get(productTitle));
 
 
+        // убрать в orderRepository
         Connection connection = SqlHelper.getConnection();
         PreparedStatement ps = null;
         try {

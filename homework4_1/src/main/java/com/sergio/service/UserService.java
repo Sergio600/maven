@@ -19,6 +19,7 @@ public class UserService {
             throw new InvalidArgumentException("Name can't be null");
         }
 
+        // убрать в юзеррепозитори .get()
         Connection connection = SqlHelper.getConnection();
         User user = new User();
         try {

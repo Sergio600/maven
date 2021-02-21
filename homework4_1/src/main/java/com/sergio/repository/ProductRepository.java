@@ -88,7 +88,6 @@ public class ProductRepository {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return productId;
     }
 }
