@@ -2,13 +2,15 @@ package com.sergio.repository;
 
 import com.sergio.domain.User;
 import com.sergio.sql.SqlHelper;
+import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
+@Repository
 public class UserRepository {
+    private static Connection connection = SqlHelper.getConnection();
 
     /**
      * Create or get user from DB
@@ -17,7 +19,6 @@ public class UserRepository {
      */
     public static User getUser(String userName){
         User user= new User();
-        Connection connection = SqlHelper.getConnection();
 
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT * from user where LOGIN=?;");
@@ -45,7 +46,6 @@ public class UserRepository {
      * @return user with id from DB
      */
     public static User save(User user) {
-        Connection connection = SqlHelper.getConnection();
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement("INSERT INTO USER(LOGIN) VALUES (?)");

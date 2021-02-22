@@ -13,6 +13,7 @@ public class Listener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Hello Listener is works!");
         SqlHelper.initDB();
+        SpringContext.getApplicationContext();
     }
 
     @Override

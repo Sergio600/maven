@@ -6,13 +6,18 @@ import com.sergio.domain.User;
 import com.sergio.exception.InvalidArgumentException;
 import com.sergio.repository.OrderRepository;
 import com.sergio.repository.ProductRepository;
-import com.sergio.sql.SqlHelper;
+import com.sergio.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
+@Service
 public class OrderService {
+    private OrderRepository orderRepository;
+    private UserRepository userRepository;
+
+    public OrderService(OrderRepository orderRepository, UserRepository userRepository) {
+        this.orderRepository = orderRepository;
+        this.userRepository = userRepository;
+    }
 
     /**
      * Creates order or returns saved order.

@@ -1,15 +1,18 @@
 package com.sergio.repository;
 
 import com.sergio.sql.SqlHelper;
+import org.springframework.stereotype.Repository;
+
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
+@Repository
 public class ProductRepository {
+    private static Connection connection = SqlHelper.getConnection();
 
     public static Map<String, Double> getProducts() {
         Map<String, Double> products = new HashMap<>();
-        Connection connection = SqlHelper.getConnection();
         ResultSet rs = null;
 
         try {
@@ -36,7 +39,6 @@ public class ProductRepository {
      */
     public static int getProductIdByTitle(String productTitle) {
         int productId = -1;
-        Connection connection = SqlHelper.getConnection();
         ResultSet rs = null;
 
         try {

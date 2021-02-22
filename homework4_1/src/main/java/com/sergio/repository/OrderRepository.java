@@ -4,6 +4,7 @@ import com.sergio.domain.Order;
 import com.sergio.domain.Product;
 import com.sergio.domain.User;
 import com.sergio.sql.SqlHelper;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,10 +16,11 @@ import java.util.List;
 /**
  * Repository class that emulate data base and has some repository methods.
  */
+@Repository
 public class OrderRepository {
+    private static Connection connection = SqlHelper.getConnection();
 
     public static Order getOrder(User user) {
-        Connection connection = SqlHelper.getConnection();
         Order order = new Order();
         try {
             PreparedStatement ps = connection.prepareStatement("" +
@@ -59,8 +61,6 @@ public class OrderRepository {
      * @return saved order.
      */
     public static Order save(Order order) {
-        Connection connection = SqlHelper.getConnection();
-
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement("INSERT INTO ORDERS(USER_ID) VALUES (?)");
@@ -80,8 +80,6 @@ public class OrderRepository {
     }
 
     public static Order updateTotalPrice(Double totalPrice, Order order) {
-
-        Connection connection = SqlHelper.getConnection();
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement("UPDATE ORDERS SET TOTAL_PRICE = ? WHERE ID=?;");
@@ -96,7 +94,6 @@ public class OrderRepository {
     }
 
     public static void addProduct(Product product, Order order) {
-        Connection connection = SqlHelper.getConnection();
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement("INSERT INTO ORDER_GOOD(ORDER_ID, GOOD_ID) VALUES (?,?)");
@@ -110,7 +107,6 @@ public class OrderRepository {
 
 
     public static void removeProduct(int productId, Order order) {
-        Connection connection = SqlHelper.getConnection();
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement("" +
@@ -129,7 +125,6 @@ public class OrderRepository {
 
     public static List<Product> getProductsByOrder(Order order) {
         List<Product> products = new ArrayList<>();
-        Connection connection = SqlHelper.getConnection();
         ResultSet rs = null;
         try {
             PreparedStatement ps = connection.prepareStatement("" +
