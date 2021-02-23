@@ -1,15 +1,23 @@
 package com.sergio.service;
 
 import com.sergio.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
 @Service
 public class ProductService {
+    @Autowired
+    private ProductRepository productRepository;
 
-    public static Map<String, Double> getAllProducts(){
-        Map<String, Double>products = ProductRepository.getProducts();
+//    @Autowired
+//    public ProductService(ProductRepository productRepository) {
+//        this.productRepository = productRepository;
+//    }
+
+    public Map <String, Double> getAllProducts(){
+        Map<String, Double>products = productRepository.getProducts();
         return products;
     }
 }

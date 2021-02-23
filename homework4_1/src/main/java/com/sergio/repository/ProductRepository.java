@@ -11,7 +11,7 @@ import java.util.Map;
 public class ProductRepository {
     private static Connection connection = SqlHelper.getConnection();
 
-    public static Map<String, Double> getProducts() {
+    public Map<String, Double> getProducts() {
         Map<String, Double> products = new HashMap<>();
         ResultSet rs = null;
 

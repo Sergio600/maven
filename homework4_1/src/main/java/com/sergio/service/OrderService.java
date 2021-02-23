@@ -7,17 +7,23 @@ import com.sergio.exception.InvalidArgumentException;
 import com.sergio.repository.OrderRepository;
 import com.sergio.repository.ProductRepository;
 import com.sergio.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
+    @Autowired
     private OrderRepository orderRepository;
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ProductService productService;
 
-    public OrderService(OrderRepository orderRepository, UserRepository userRepository) {
-        this.orderRepository = orderRepository;
-        this.userRepository = userRepository;
-    }
+//    @Autowired
+//    public OrderService(OrderRepository orderRepository, UserRepository userRepository) {
+//        this.orderRepository = orderRepository;
+//        this.userRepository = userRepository;
+//    }
 
     /**
      * Creates order or returns saved order.
@@ -25,7 +31,7 @@ public class OrderService {
      * @param user .
      * @return created order.
      */
-    public static Order createOrGetOrder(User user) {
+    public Order createOrGetOrder(User user) {
         if (user == null) {
             throw new InvalidArgumentException("Name can't be null");
         }
@@ -40,7 +46,7 @@ public class OrderService {
      * @param selectedProducts string array of product keys from product map.
      * @return order with saved order.
      */
-    public static Order addProducts(Order order, String[] selectedProducts) {
+    public Order addProducts(Order order, String[] selectedProducts) {
         if (order == null || selectedProducts == null) {
             throw new InvalidArgumentException("Arguments cant be null");
         }
@@ -51,10 +57,10 @@ public class OrderService {
         Product product = new Product();
         product.setId(productId);
         product.setName(productTitle);
-        product.setPrice(ProductService.getAllProducts().get(productTitle));
+        product.setPrice(productService.getAllProducts().get(productTitle));
 
         OrderRepository.addProduct(product, order);
-        order.setProducts(OrderRepository.getProductsByOrder(order));
+        order.setProducts(orderRepository.getProductsByOrder(order));
         updateOrderTotalPrice(order);
 
         return order;
@@ -67,13 +73,13 @@ public class OrderService {
      * @param productId
      * @return order with removed product
      */
-    public static Order removeProduct(Order order, int productId) {
+    public Order removeProduct(Order order, int productId) {
         if (order == null) {
             throw new InvalidArgumentException("Arguments cant be null");
         }
 
-        OrderRepository.removeProduct(productId, order);
-        order.setProducts(OrderRepository.getProductsByOrder(order));
+        orderRepository.removeProduct(productId, order);
+        order.setProducts(orderRepository.getProductsByOrder(order));
         updateOrderTotalPrice(order);
 
         return order;

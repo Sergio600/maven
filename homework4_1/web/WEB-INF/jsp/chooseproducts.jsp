@@ -15,9 +15,9 @@
      </style>
 
 
- <%User user = UserService.createOrGetUser(session.getAttribute("customer").toString());%>
+ <%User user = userService.createOrGetUser(session.getAttribute("customer").toString());%>
 
- <%Order order = OrderService.createOrGetOrder(user);%>
+ <%Order order = orderService.createOrGetOrder(user);%>
 
 <html lang="en">
 

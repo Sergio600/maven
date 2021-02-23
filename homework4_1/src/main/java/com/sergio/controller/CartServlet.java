@@ -1,11 +1,15 @@
 package com.sergio.controller;
 
+import com.sergio.SpringContext;
 import com.sergio.domain.Order;
 import com.sergio.domain.User;
 import com.sergio.repository.OrderRepository;
 import com.sergio.repository.ProductRepository;
 import com.sergio.service.OrderService;
 import com.sergio.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +20,18 @@ import java.io.IOException;
 
 @WebServlet(name="CartServlet", urlPatterns="/cart")
 public class CartServlet extends HttpServlet {
+
+    private OrderService orderService;
+    private UserService userService;
+    private OrderRepository orderRepository;
+
+    @Override
+    public void init() {
+        AnnotationConfigApplicationContext context = SpringContext.getApplicationContext();
+        this.orderService = (OrderService) context.getBean(OrderService.class);
+        this.userService = (UserService) context.getBean(UserService.class);
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -30,9 +46,9 @@ public class CartServlet extends HttpServlet {
         }
         customer = req.getParameter("customer");
 
-        User user = UserService.createOrGetUser(customer);
-        Order order = OrderService.createOrGetOrder(user);
-        order.setProducts(OrderRepository.getProductsByOrder(order));
+        User user = userService.createOrGetUser(customer);
+        Order order = orderService.createOrGetOrder(user);
+        order.setProducts(orderRepository.getProductsByOrder(order));
 
         req.setAttribute("order", order);
         req.getRequestDispatcher("WEB-INF/jsp/cart.jsp").forward(req, resp);

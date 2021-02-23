@@ -106,7 +106,7 @@ public class OrderRepository {
     }
 
 
-    public static void removeProduct(int productId, Order order) {
+    public void removeProduct(int productId, Order order) {
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement("" +
@@ -123,7 +123,7 @@ public class OrderRepository {
         }
     }
 
-    public static List<Product> getProductsByOrder(Order order) {
+    public List<Product> getProductsByOrder(Order order) {
         List<Product> products = new ArrayList<>();
         ResultSet rs = null;
         try {
