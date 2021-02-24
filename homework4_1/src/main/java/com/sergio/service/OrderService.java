@@ -18,6 +18,11 @@ public class OrderService {
     private UserRepository userRepository;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ProductRepository productRepository;
+
+
+
 
 //    @Autowired
 //    public OrderService(OrderRepository orderRepository, UserRepository userRepository) {
@@ -35,7 +40,7 @@ public class OrderService {
         if (user == null) {
             throw new InvalidArgumentException("Name can't be null");
         }
-        Order order = OrderRepository.getOrder(user);
+        Order order = orderRepository.getOrder(user);
         return order;
     }
 
@@ -52,14 +57,14 @@ public class OrderService {
         }
 
         String productTitle = selectedProducts[0];
-        int productId = ProductRepository.getProductIdByTitle(productTitle);
+        int productId = productRepository.getProductIdByTitle(productTitle);
 
         Product product = new Product();
         product.setId(productId);
         product.setName(productTitle);
         product.setPrice(productService.getAllProducts().get(productTitle));
 
-        OrderRepository.addProduct(product, order);
+        orderRepository.addProduct(product, order);
         order.setProducts(orderRepository.getProductsByOrder(order));
         updateOrderTotalPrice(order);
 
@@ -91,12 +96,12 @@ public class OrderService {
      * @param order order for calculation.
      * @return total price.
      */
-    public static Order updateOrderTotalPrice(Order order) {
+    public Order updateOrderTotalPrice(Order order) {
         double totalPrice = 0;
         for (Product product : order.getProducts()) {
             totalPrice += product.getPrice();
         }
-        OrderRepository.updateTotalPrice(totalPrice, order);
+        orderRepository.updateTotalPrice(totalPrice, order);
 
         return order;
     }

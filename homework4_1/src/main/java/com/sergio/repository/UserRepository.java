@@ -17,7 +17,7 @@ public class UserRepository {
      * @param userName
      * @return
      */
-    public static User getUser(String userName){
+    public User getUser(String userName){
         User user= new User();
 
         try {
@@ -45,7 +45,7 @@ public class UserRepository {
      * @param user
      * @return user with id from DB
      */
-    public static User save(User user) {
+    public User save(User user) {
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement("INSERT INTO USER(LOGIN) VALUES (?)");

@@ -37,7 +37,7 @@ public class ProductRepository {
      * @param productTitle
      * @return
      */
-    public static int getProductIdByTitle(String productTitle) {
+    public int getProductIdByTitle(String productTitle) {
         int productId = -1;
         ResultSet rs = null;
 

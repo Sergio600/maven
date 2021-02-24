@@ -1,32 +1,51 @@
 package com.sergio.sql;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.*;
+import java.util.Properties;
 
 public class SqlHelper {
 
     private static Connection connection = getConnection();
 
     public static Connection getConnection(){
+
         try {
+            Properties properties = new Properties();
+            InputStream is = new FileInputStream("DBconn.properties");
+            properties.load(is);
+            is.close();
+
+            String url = properties.getProperty("url");
+            String user = properties.getProperty("user");
+            String password = properties.getProperty("password");
+
+            Class.forName("org.h2.Driver");
+            return DriverManager.getConnection(url, user,password);
+
+        } catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException("das");
+        }
+
+//        try {
 //            Class.forName("org.h2.Driver");
 //            return DriverManager.getConnection(
 //                    "jdbc:h2:tcp://localhost/~/test;",
 //                    "sergio",
 //                    "12345");
 
-
-            // вынести данные для соединения в проперти файл
-            Class.forName("org.h2.Driver");
-            return DriverManager
-                    .getConnection(
-                            "jdbc:h2:mem:test1;DB_CLOSE_DELAY=-1;",
-                            "sergio",
-                            "12345");
-
-        } catch (SQLException |ClassNotFoundException e){
-            e.printStackTrace();
-            throw new RuntimeException("das");
-        }
+//            return DriverManager
+//                    .getConnection(
+//                            "jdbc:h2:mem:test1;DB_CLOSE_DELAY=-1;",
+//                            "sergio",
+//                            "12345");
+//
+//        } catch (SQLException |ClassNotFoundException e){
+//            e.printStackTrace();
+//            throw new RuntimeException("das");
+//        }
     }
 
 

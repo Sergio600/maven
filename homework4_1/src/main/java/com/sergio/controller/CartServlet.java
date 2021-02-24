@@ -30,6 +30,7 @@ public class CartServlet extends HttpServlet {
         AnnotationConfigApplicationContext context = SpringContext.getApplicationContext();
         this.orderService = (OrderService) context.getBean(OrderService.class);
         this.userService = (UserService) context.getBean(UserService.class);
+        this.orderRepository = (OrderRepository) context.getBean(OrderRepository.class);
     }
 
     @Override

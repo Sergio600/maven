@@ -20,7 +20,7 @@ public class UserService {
         if (userName == null) {
             throw new InvalidArgumentException("Name can't be null");
         }
-        User user = UserRepository.getUser(userName);
+        User user = userRepository.getUser(userName);
         return user;
     }
 }

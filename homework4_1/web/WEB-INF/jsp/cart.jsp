@@ -4,6 +4,8 @@
 <%@ page import="com.sergio.domain.Product"%>
 <%@ page import="com.sergio.service.OrderService"%>
 <%@ page import="com.sergio.service.UserService"%>
+<%@ page import="com.sergio.SpringContext"%>
+<%@ page import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 
@@ -13,8 +15,13 @@
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
 
-    <%User user = UserService.createOrGetUser(session.getAttribute("customer").toString());%>
-    <%Order order = OrderService.createOrGetOrder(user);%>
+<%
+AnnotationConfigApplicationContext context = SpringContext.getApplicationContext();
+UserService userService = (UserService) context.getBean(UserService.class);
+OrderService orderService = (OrderService) context.getBean(OrderService.class);
+User user = userService.createOrGetUser(session.getAttribute("customer").toString());
+Order order = orderService.createOrGetOrder(user);
+%>
 
 <html lang="en">
 

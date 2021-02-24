@@ -20,7 +20,7 @@ import java.util.List;
 public class OrderRepository {
     private static Connection connection = SqlHelper.getConnection();
 
-    public static Order getOrder(User user) {
+    public Order getOrder(User user) {
         Order order = new Order();
         try {
             PreparedStatement ps = connection.prepareStatement("" +
@@ -60,7 +60,7 @@ public class OrderRepository {
      * @param order it's order to save.
      * @return saved order.
      */
-    public static Order save(Order order) {
+    public Order save(Order order) {
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement("INSERT INTO ORDERS(USER_ID) VALUES (?)");
@@ -79,7 +79,7 @@ public class OrderRepository {
         return order;
     }
 
-    public static Order updateTotalPrice(Double totalPrice, Order order) {
+    public Order updateTotalPrice(Double totalPrice, Order order) {
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement("UPDATE ORDERS SET TOTAL_PRICE = ? WHERE ID=?;");
@@ -93,7 +93,7 @@ public class OrderRepository {
         return order;
     }
 
-    public static void addProduct(Product product, Order order) {
+    public void addProduct(Product product, Order order) {
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement("INSERT INTO ORDER_GOOD(ORDER_ID, GOOD_ID) VALUES (?,?)");
