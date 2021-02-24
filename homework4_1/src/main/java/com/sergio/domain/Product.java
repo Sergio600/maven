@@ -5,8 +5,17 @@ package com.sergio.domain;
  */
 public class Product {
 
+	private int id;
 	private String name;
 	private double price;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -23,4 +32,6 @@ public class Product {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+
 }

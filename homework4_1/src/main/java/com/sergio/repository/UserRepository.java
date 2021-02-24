@@ -1,21 +1,67 @@
 package com.sergio.repository;
 
-import com.sergio.domain.Order;
+import com.sergio.domain.User;
+import com.sergio.sql.SqlHelper;
+import org.springframework.stereotype.Repository;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import java.util.List;
-import java.util.Optional;
-
+@Repository
 public class UserRepository {
+    private static Connection connection = SqlHelper.getConnection();
 
-    public static Optional<Object> getByName(String customer) {
+    /**
+     * Create or get user from DB
+     * @param userName
+     * @return
+     */
+    public User getUser(String userName){
+        User user= new User();
 
-        List<Order> orders = OrderRepository.getOrders();
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * from user where LOGIN=?;");
+            ps.setString(1, userName);
+            ResultSet rs = ps.executeQuery();
 
-        for (Order order : orders) {
-            if (order.getCustomer().equals(customer)) {
-                return Optional.of(order);
+            if (rs.next()) {
+                user.setUserId(rs.getInt("ID"));
+                user.setName(userName);
+            } else {
+                user = new User(userName);
+                user = save(user);
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return Optional.empty();
+        return user;
+    }
+
+    /**
+     * Adds user to users and to Data Base
+     *
+     * @param user
+     * @return user with id from DB
+     */
+    public User save(User user) {
+        PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement("INSERT INTO USER(LOGIN) VALUES (?)");
+            ps.setString(1, user.getName());
+            ps.execute();
+
+            ps = connection.prepareStatement("SELECT * from user where LOGIN=?;");
+            ps.setString(1, user.getName());
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+                user.setUserId(rs.getInt(1));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return user;
     }
 }

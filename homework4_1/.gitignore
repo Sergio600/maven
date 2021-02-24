@@ -1,0 +1,9 @@
+.gitattributes
+.DS_Store
+.idea
+/**.idea
+/**target
+html
+target
+.iml
+homework4_1.iml

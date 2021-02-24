@@ -1,14 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 <%@ page import="com.sergio.domain.Order"%>
-<%@ page import="com.sergio.repository.OrderRepository"%>
+<%@ page import="com.sergio.domain.User"%>
+<%@ page import="com.sergio.domain.Product"%>
 <%@ page import="com.sergio.service.OrderService"%>
+<%@ page import="com.sergio.service.UserService"%>
+<%@ page import="com.sergio.SpringContext"%>
+<%@ page import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <style>
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
 
-<%Order order = OrderService.createOrGetOrder(session.getAttribute("customer").toString());%>
+<%
+AnnotationConfigApplicationContext context = SpringContext.getApplicationContext();
+UserService userService = (UserService) context.getBean(UserService.class);
+OrderService orderService = (OrderService) context.getBean(OrderService.class);
+User user = userService.createOrGetUser(session.getAttribute("customer").toString());
+Order order = orderService.createOrGetOrder(user);
+%>
 
 <html lang="en">
 
@@ -20,19 +33,19 @@
 
 <body>
 <div class="container">
-    <div class="header">Dear, <%=order.getCustomer()%>, your order is: </div>
 
-    <% int index =0; %>
+    <div class="header">Dear, <%=user.getName()%>, your order is: </div>
 
+<!-- ФОРМА ОТОБРАЖЕНИЯ ВЫБРАННЫХ ПРОДУКТОВ -->
+
+     <% int index =0; %>
      <c:forEach var="pickedProduct" items="${order.getProducts()}">
            <p> <%= ++index %>) ${pickedProduct.getName()} ${pickedProduct.getPrice()}$</p>
-
      </c:forEach>
-
 
     <div class="totalPrice">Total price is: <%=order.getTotalPrice()%>$</div>
 
-    <form method="POST" action="/homework4_1">
+    <form method="POST" action="chooseproducts">
            <input type="submit" name="add" value="Edit cart"></input>
     </form>
 

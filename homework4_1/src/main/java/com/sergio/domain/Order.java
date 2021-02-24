@@ -2,27 +2,38 @@ package com.sergio.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Class that represents POJO of order.
  */
 public class Order {
 
-	private static AtomicInteger count = new AtomicInteger(0);
-
-	private int id;
-	private String customer;
+	private Integer id;
+	private User user;
+	private int userID;
 	private List<Product> products = new ArrayList<>();
 	private double totalPrice;
 
-	public Order(String customer) {
-		this.customer = customer;
-		this.id = count.incrementAndGet();
+	public Order(){}
+
+	public int getUserID() {
+		return userID;
 	}
 
-	public int getId() {
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
+	public Order(User user) {
+		this.user = user;
+	}
+
+	public Integer getId() {
 		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public double getTotalPrice() {
@@ -33,8 +44,12 @@ public class Order {
 		this.totalPrice = totalPrice;
 	}
 
-	public String getCustomer() {
-		return customer;
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public User getUser() {
+		return user;
 	}
 
 	public List<Product> getProducts() {
@@ -44,4 +59,6 @@ public class Order {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+
+
 }
