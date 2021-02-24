@@ -9,7 +9,7 @@ public class SqlHelper {
 
     private static Connection connection = getConnection();
 
-    public static Connection getConnection(){
+    public static Connection getConnection() {
 
         try {
             Properties properties = new Properties();
@@ -22,32 +22,13 @@ public class SqlHelper {
             String password = properties.getProperty("password");
 
             Class.forName("org.h2.Driver");
-            return DriverManager.getConnection(url, user,password);
+            return DriverManager.getConnection(url, user, password);
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("das");
         }
-
-//        try {
-//            Class.forName("org.h2.Driver");
-//            return DriverManager.getConnection(
-//                    "jdbc:h2:tcp://localhost/~/test;",
-//                    "sergio",
-//                    "12345");
-
-//            return DriverManager
-//                    .getConnection(
-//                            "jdbc:h2:mem:test1;DB_CLOSE_DELAY=-1;",
-//                            "sergio",
-//                            "12345");
-//
-//        } catch (SQLException |ClassNotFoundException e){
-//            e.printStackTrace();
-//            throw new RuntimeException("das");
-//        }
     }
-
 
     public static void initDB() {
 
@@ -97,70 +78,8 @@ public class SqlHelper {
                     "");
             ps.execute();
 
-//              Проверка создается ли база
-//            ps=connection.prepareStatement("select * from good;");
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()){
-//                System.out.println(rs.getInt(1));
-//                System.out.println(rs.getString(2));
-//                System.out.println(rs.getInt(3));
-//            }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-//    public static void showUsers(){
-//        try {
-//            PreparedStatement ps = connection.prepareStatement("Select * from user;");
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()){
-//                System.out.println("USER: ");
-//                System.out.print(rs.getInt(1)+ " ");
-//                System.out.print(rs.getString(2)+ " ");
-//                System.out.println();
-//                System.out.println("------------------------");
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public static void showOrders(){
-//        try {
-//            PreparedStatement ps = connection.prepareStatement("Select * from orders;");
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()){
-//                System.out.println("ORDER: ");
-//                System.out.print(rs.getInt(1)+ " ");
-//                System.out.print(rs.getInt(2)+ " ");
-//                System.out.print(rs.getDouble(3)+ " ");
-//                System.out.println();
-//                System.out.println("------------------------");
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public static void showOrdersGood(){
-//        try {
-//            PreparedStatement ps = connection.prepareStatement("Select * from order_good;");
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()){
-//                System.out.print("Order_good: ");
-//                System.out.print(rs.getInt(1) + " ");
-//                System.out.print(rs.getInt(2)+ " ");
-//                System.out.print(rs.getInt(3)+ " ");
-//                System.out.println();
-//                System.out.println("------------------------");
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
