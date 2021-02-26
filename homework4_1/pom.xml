@@ -10,8 +10,6 @@
     <packaging>war</packaging>
 
     <properties>
-
-
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -20,7 +18,7 @@
         <junit.version>4.12</junit.version>
         <servlet.version>3.1.0</servlet.version>
         <jstl.version>1.2</jstl.version>
-        <spring.version>5.1.2.RELEASE</spring.version>
+
         <spring-security.version>5.1.1.RELEASE</spring-security.version>
 
         <!-- Plugins versions -->
@@ -29,7 +27,17 @@
         <maven-resources-plugin.version>2.4.2</maven-resources-plugin.version>
         <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
 
+        <spring.version>5.3.4</spring.version>
+
     </properties>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Maven Plugin Repository</name>
+            <url>http://repo1.maven.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
 
 
     <dependencies>
@@ -46,7 +54,7 @@
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <version>${jstl.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
@@ -60,28 +68,44 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>5.3.4</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.3.4</version>
+            <version>${spring.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
-
+        <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring5 -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring5</artifactId>
+            <version>3.0.12.RELEASE</version>
+        </dependency>
 
     </dependencies>
-
-
 
 
     <build>
         <directory>${project.basedir}/target</directory>
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -91,6 +115,7 @@
                     <target>${maven.compiler.source}</target>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -104,6 +129,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <!-- Maven Tomcat Plugin -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
