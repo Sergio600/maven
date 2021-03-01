@@ -23,13 +23,6 @@ public class OrderService {
 
 
 
-
-//    @Autowired
-//    public OrderService(OrderRepository orderRepository, UserRepository userRepository) {
-//        this.orderRepository = orderRepository;
-//        this.userRepository = userRepository;
-//    }
-
     /**
      * Creates order or returns saved order.
      *

@@ -11,11 +11,6 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-//    @Autowired
-//    public ProductService(ProductRepository productRepository) {
-//        this.productRepository = productRepository;
-//    }
-
     public Map <String, Double> getAllProducts(){
         Map<String, Double>products = productRepository.getProducts();
         return products;

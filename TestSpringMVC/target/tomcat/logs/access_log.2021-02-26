@@ -1,3 +1,0 @@
-0:0:0:0:0:0:0:1 - - [26/Feb/2021:12:52:36 +0300] "GET /TestSpringMVC/hello HTTP/1.1" 500 5754 http-bio-8099-exec-2 551
-0:0:0:0:0:0:0:1 - - [26/Feb/2021:12:52:56 +0300] "GET /hello HTTP/1.1" 404 - http-bio-8099-exec-3 0
-0:0:0:0:0:0:0:1 - - [26/Feb/2021:12:53:06 +0300] "GET /TestSpringMVC/hello HTTP/1.1" 500 5754 http-bio-8099-exec-6 6

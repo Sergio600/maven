@@ -3,7 +3,7 @@ package com.sergio.repository;
 import com.sergio.domain.Order;
 import com.sergio.domain.Product;
 import com.sergio.domain.User;
-import com.sergio.sql.SqlHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -18,7 +18,8 @@ import java.util.List;
  */
 @Repository
 public class OrderRepository {
-    private static Connection connection = SqlHelper.getConnection();
+    @Autowired
+    Connection connection;
 
     public Order getOrder(User user) {
         Order order = new Order();

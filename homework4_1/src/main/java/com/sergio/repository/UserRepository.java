@@ -1,8 +1,9 @@
 package com.sergio.repository;
 
 import com.sergio.domain.User;
-import com.sergio.sql.SqlHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,15 +11,17 @@ import java.sql.SQLException;
 
 @Repository
 public class UserRepository {
-    private static Connection connection = SqlHelper.getConnection();
+    @Autowired
+    Connection connection;
 
     /**
      * Create or get user from DB
+     *
      * @param userName
      * @return
      */
-    public User getUser(String userName){
-        User user= new User();
+    public User getUser(String userName) {
+        User user = new User();
 
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT * from user where LOGIN=?;");
@@ -56,7 +59,7 @@ public class UserRepository {
             ps.setString(1, user.getName());
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()){
+            if (rs.next()) {
                 user.setUserId(rs.getInt(1));
             }
         } catch (SQLException throwables) {

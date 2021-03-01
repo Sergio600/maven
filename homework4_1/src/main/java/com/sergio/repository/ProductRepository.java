@@ -1,6 +1,6 @@
 package com.sergio.repository;
 
-import com.sergio.sql.SqlHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -9,7 +9,9 @@ import java.util.Map;
 
 @Repository
 public class ProductRepository {
-    private static Connection connection = SqlHelper.getConnection();
+
+    @Autowired
+    Connection connection;
 
     public Map<String, Double> getProducts() {
         Map<String, Double> products = new HashMap<>();
