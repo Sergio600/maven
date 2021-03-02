@@ -17,7 +17,7 @@
 
 
      <% int index =0; %>
-<c:forEach var="product" items="${products}">
+     <c:forEach var="product" items="${products}">
            <p> <%= ++index %>) ${product.getName()} ${product.getPrice()}$</p>
      </c:forEach>
 

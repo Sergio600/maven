@@ -1,12 +1,12 @@
 package com.sergio.controller;
 
-import com.sergio.SpringContext;
 import com.sergio.domain.Order;
 import com.sergio.domain.User;
 import com.sergio.repository.OrderRepository;
 import com.sergio.service.OrderService;
 import com.sergio.service.ProductService;
 import com.sergio.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.ServletException;
@@ -17,6 +17,7 @@ import java.io.IOException;
 @WebServlet(name = "ProductServlet", urlPatterns = "/chooseproducts")
 public class ProductServlet extends HttpServlet {
 
+    @Autowired
     private OrderService orderService;
     private UserService userService;
     private ProductService productService;
