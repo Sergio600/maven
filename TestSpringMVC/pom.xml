@@ -23,7 +23,6 @@
     <servlet.version>3.1.0</servlet.version>
     <jstl.version>1.2</jstl.version>
 
-    <spring-security.version>5.1.1.RELEASE</spring-security.version>
 
     <!-- Plugins versions -->
     <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
@@ -32,6 +31,7 @@
     <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
 
     <spring.version>5.3.4</spring.version>
+    <spring-security.version>5.1.1.RELEASE</spring-security.version>
 
   </properties>
 
@@ -42,6 +42,7 @@
       <url>http://repo1.maven.org/maven2</url>
     </pluginRepository>
   </pluginRepositories>
+
 
   <dependencies>
     <dependency>
@@ -123,6 +124,25 @@
 
 
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-framework-bom</artifactId>
+        <version>${spring.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-bom</artifactId>
+        <version>${spring-security.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <directory>${project.basedir}/target</directory>

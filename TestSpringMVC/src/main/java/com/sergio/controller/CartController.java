@@ -32,7 +32,6 @@ public class CartController {
 
         String customer;
 
-
         if (req.getParameter("exit") != null) {
             session.invalidate();
             return "jsp/welcome";

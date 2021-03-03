@@ -17,8 +17,6 @@ public class AccessFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) req;
 
-
-
         if ((httpServletRequest.getSession().getAttribute("customer") == null &&
                 req.getParameter("customer") == null || httpServletRequest.getSession().getAttribute("customer")==null&&
                 req.getParameter("customer").equals("")||

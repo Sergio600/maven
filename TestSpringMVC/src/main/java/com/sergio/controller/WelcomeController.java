@@ -21,40 +21,26 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class WelcomeController {
-    @Autowired
-    Connection connection;
-    @Autowired
     private OrderService orderService;
-    @Autowired
     private UserService userService;
-    @Autowired
     private ProductService productService;
+
+    @Autowired
+    public WelcomeController(OrderService orderService, UserService userService, ProductService productService) {
+        this.orderService = orderService;
+        this.userService = userService;
+        this.productService = productService;
+    }
 
     @GetMapping("/")
     public String helloPage(Model model, HttpSession session) throws SQLException {
         if(session.getAttribute("customer")!=null){
             String customer = session.getAttribute("customer").toString();
             model.addAttribute("products", productService.getAllProducts());
-
             model.addAttribute("order", orderService.createOrGetOrder(userService.createOrGetUser(customer)));
             return "jsp/chooseproducts";
         } else {
             return "jsp/welcome";
         }
-    }
-
-    @GetMapping("/products")
-    public String showProductsPage(Model model) throws SQLException {
-        List<Product> products = new ArrayList<>();
-
-        PreparedStatement ps = connection.prepareStatement("Select * from good");
-        ps.execute();
-        ResultSet rs = ps.executeQuery();
-        while(rs.next()){
-            products.add(new Product(rs.getInt(1), rs.getString(2), rs.getInt(3)));
-        }
-        model.addAttribute("products", products);
-
-        return "first/goodbye";
     }
 }
