@@ -1,0 +1,5 @@
+0:0:0:0:0:0:0:1 - - [04/Mar/2021:16:25:39 +0300] "GET /TestSpringMVC/ HTTP/1.1" 200 1188 http-bio-8099-exec-3 1536
+0:0:0:0:0:0:0:1 - - [04/Mar/2021:16:25:42 +0300] "POST /TestSpringMVC/login HTTP/1.1" 302 - http-bio-8099-exec-4 71
+0:0:0:0:0:0:0:1 - - [04/Mar/2021:16:25:42 +0300] "GET /TestSpringMVC/login?error HTTP/1.1" 200 1188 http-bio-8099-exec-5 18
+0:0:0:0:0:0:0:1 - - [04/Mar/2021:16:25:51 +0300] "POST /TestSpringMVC/login HTTP/1.1" 302 - http-bio-8099-exec-7 3
+0:0:0:0:0:0:0:1 - - [04/Mar/2021:16:25:51 +0300] "GET /TestSpringMVC/login?error HTTP/1.1" 200 1188 http-bio-8099-exec-9 4
