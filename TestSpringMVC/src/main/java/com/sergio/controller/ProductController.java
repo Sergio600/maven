@@ -32,7 +32,7 @@ public class ProductController {
 
 
     @RequestMapping
-    public String makeOrder(ModelMap model, HttpServletRequest req, HttpSession session, Principal principal) {
+    public String makeOrder(ModelMap model, HttpServletRequest req, Principal principal) {
 
 //        String customer;
 //
@@ -67,14 +67,4 @@ public class ProductController {
         return "jsp/chooseproducts";
 
     }
-
-//    @PostMapping("/addProduct")
-//    public String addProductToCart(@ModelAttribute ("id") int id,
-//                                   @ModelAttribute("selected") String selected,
-//                                   ModelMap model){
-//
-//
-//        return "redirect:/chooseproducts";
-//    }
-
 }

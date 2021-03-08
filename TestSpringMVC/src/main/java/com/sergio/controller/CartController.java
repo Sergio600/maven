@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/cart")
@@ -28,18 +29,9 @@ public class CartController {
     }
 
     @RequestMapping
-    public String showCart(Model model, HttpSession session, HttpServletRequest req) {
+    public String showCart(Model model, Principal principal) {
 
-        String customer;
-
-        if (req.getParameter("exit") != null) {
-            session.invalidate();
-            return "jsp/welcome";
-        }
-
-        customer = req.getParameter("customer");
-
-        User user = userService.createOrGetUser(customer);
+        User user = userService.createOrGetUser(principal.getName());
         Order order = orderService.createOrGetOrder(user);
         order.setProducts(orderRepository.getProductsByOrder(order));
 
@@ -47,7 +39,7 @@ public class CartController {
         model.addAttribute("order", user.getOrder());
         model.addAttribute("selectedProducts", order.getProducts());
         model.addAttribute("totalPrice", order.getTotalPrice());
-        return "jsp/cart";
+        return "cart";
     }
 }
 

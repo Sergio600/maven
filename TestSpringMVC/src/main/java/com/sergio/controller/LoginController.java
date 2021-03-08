@@ -32,20 +32,18 @@ public class LoginController {
 
     @GetMapping("/")
     public String goTOLoginPage(){
-        return "jsp/welcome";
+        return "welcome";
     }
 
     @RequestMapping("/login")
-    public String helloPage(Model model, HttpServletRequest req, Principal principal) throws SQLException {
+    public String helloPage(Model model, Principal principal) throws SQLException {
         if(principal!=null){
-//            String customer = req.getAttribute("customer").toString();
-//            System.out.println(customer);
             System.out.println(principal.getName());
             model.addAttribute("products", productService.getAllProducts());
             model.addAttribute("order", orderService.createOrGetOrder(userService.createOrGetUser(principal.getName())));
-            return "jsp/chooseproducts";
+            return "chooseproducts";
         } else {
-            return "jsp/welcome";
+            return "welcome";
         }
     }
 
