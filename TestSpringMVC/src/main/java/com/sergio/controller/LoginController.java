@@ -37,6 +37,9 @@ public class LoginController {
 
     @RequestMapping("/login")
     public String helloPage(Model model, Principal principal) throws SQLException {
+        System.out.println(userService.createOrGetUser("Sergio").getUserId());
+        System.out.println(userService.createOrGetUser("Sergio").getPassword());
+
         if(principal!=null){
             System.out.println(principal.getName());
             model.addAttribute("products", productService.getAllProducts());

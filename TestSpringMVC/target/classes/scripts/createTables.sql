@@ -1,6 +1,6 @@
  CREATE TABLE USER (ID INT auto_increment,
                     LOGIN varchar(25) not null,
-                    PASSWORD varchar(25),
+                    PASSWORD varchar(255) not null,
                     primary key(id));
 
  CREATE TABLE ORDERS (ID INT auto_increment,
