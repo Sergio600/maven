@@ -33,3 +33,7 @@ input {
 .totalPrice{
      font-weight: bold;
 }
+
+button{
+    color: red;
+}
