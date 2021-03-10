@@ -1,6 +1,5 @@
 package com.sergio.controller;
 
-import com.sergio.domain.Product;
 import com.sergio.service.OrderService;
 import com.sergio.service.ProductService;
 import com.sergio.service.UserService;
@@ -10,9 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.sql.SQLException;
 
@@ -31,27 +27,21 @@ public class LoginController {
     }
 
     @GetMapping("/")
-    public String goTOLoginPage(){
+    public String goTOLoginPage() {
         return "welcome";
     }
 
     @RequestMapping("/login")
     public String helloPage(Model model, Principal principal) throws SQLException {
-        System.out.println(userService.createOrGetUser("Sergio").getUserId());
-        System.out.println(userService.createOrGetUser("Sergio").getPassword());
-
-        if(principal!=null){
-            System.out.println(principal.getName());
-            model.addAttribute("products", productService.getAllProducts());
-            model.addAttribute("order", orderService.createOrGetOrder(userService.createOrGetUser(principal.getName())));
-            return "chooseproducts";
+        if (principal != null) {
+            return "redirect:/chooseproducts";
         } else {
             return "welcome";
         }
     }
 
     @PostMapping("/logout")
-    public String logout(){
+    public String logout() {
         return "redirect:/login?logout";
     }
 }

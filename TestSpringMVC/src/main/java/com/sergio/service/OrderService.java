@@ -22,7 +22,6 @@ public class OrderService {
     private ProductRepository productRepository;
 
 
-
     /**
      * Creates order or returns saved order.
      *
@@ -40,7 +39,7 @@ public class OrderService {
     /**
      * Adds product to order.
      *
-     * @param order            order id.
+     * @param order           order id.
      * @param selectedProduct string array of product keys from product map.
      * @return order with saved order.
      */
@@ -49,15 +48,12 @@ public class OrderService {
             throw new InvalidArgumentException("Arguments cant be null");
         }
 
+        int productId = Integer.parseInt(selectedProduct);
 
-        int productId = productRepository.getProductIdByTitle(selectedProduct);
-
-        Product product = new Product();
-        product.setId(productId);
-        product.setName(selectedProduct);
-        product.setPrice(productService.getAllProducts().get(selectedProduct));
+        Product product = productRepository.getProductByID(productId);
 
         orderRepository.addProduct(product, order);
+
         order.setProducts(orderRepository.getProductsByOrder(order));
         updateOrderTotalPrice(order);
 

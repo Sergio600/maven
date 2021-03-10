@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .passwordParameter("password")
                 .usernameParameter("customer")
-                .defaultSuccessUrl("/chooseproducts",false)
+                .defaultSuccessUrl("/login",false)
                 .and().logout().logoutUrl("/logout")
                 .logoutSuccessUrl("/login");
     }
@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance())
                 .usersByUsernameQuery("select login, password, true from user where login=?")
-                .authoritiesByUsernameQuery("select login, 'ROLE_USER', from user where login =?");
+                .authoritiesByUsernameQuery("select login, 'ROLE_USER' from user where login =?");
     }
 
 //    @Bean

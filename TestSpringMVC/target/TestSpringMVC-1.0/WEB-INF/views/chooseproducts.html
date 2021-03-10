@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Choose items</title>
-    <link rel="stylesheet" data-th-href="@{css/style.css}" media="all">
+    <!--    <link rel="stylesheet" data-th-href="@{/css/style.css}" media="all">-->
+
 </head>
 <body>
 
@@ -14,7 +15,7 @@
     </nav>
 </form>
 
-<div class="header" th:text="'Hello ' + ${order.user.login} + ' !'"></div>
+<div class="header" th:text="'Hello ' + ${user.name} + ' !'"></div>
 </br>
 <div>Make your order!</div>
 
@@ -38,9 +39,10 @@
     <!-- ФОРМА ОТОБРАЖЕНИЯ ВЫБРАННЫХ ПРОДУКТОВ -->
     <p>You choose products:</p>
     <div>
-        <p th:each="pickedProduct: ${order.products}"
-           th:text="${pickedProduct.title} + ' ' + ${pickedProduct.price} + '$'"></p>
-        <button type="submit" th:value="${pickedProduct.id()}" name="remove">remove</button>
+        <div th:each="pickedProduct: ${selectedProducts}"
+             th:text="${pickedProduct.title} + ' ' + ${pickedProduct.price} + '$'">
+            <input type="button" th:field="*{type}" th:value="${pickedProduct.id}" name="remove">remove</input>
+        </div>
     </div>
 </div>
 </div>

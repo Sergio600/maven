@@ -106,7 +106,6 @@ public class OrderRepository {
         }
     }
 
-
     public void removeProduct(int productId, Order order) {
         PreparedStatement ps = null;
         try {
@@ -139,7 +138,7 @@ public class OrderRepository {
             while (rs.next()) {
                 Product product = new Product();
                 product.setId(rs.getInt(1));
-                product.setName(rs.getString(2));
+                product.setTitle(rs.getString(2));
                 product.setPrice(rs.getDouble(3));
 
                 products.add(product);

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
@@ -30,18 +29,8 @@ public class ProductController {
         this.orderRepository = orderRepository;
     }
 
-
     @RequestMapping
     public String makeOrder(ModelMap model, HttpServletRequest req, Principal principal) {
-
-//        String customer;
-//
-//        if (session.getAttribute("customer") == null && req.getParameter("customer") != null) {
-//            session.setAttribute("customer", req.getParameter("customer"));
-//            customer = req.getParameter("customer");
-//        } else {
-//            customer = session.getAttribute("customer").toString();
-//        }
         User user = userService.createOrGetUser(principal.getName());
         Order order = orderService.createOrGetOrder(user);
 
@@ -57,14 +46,12 @@ public class ProductController {
                 order = orderService.addProducts(order, req.getParameter("selected"));
             }
         }
-
         order.setProducts(orderRepository.getProductsByOrder(order));
 
         model.addAttribute("products", productService.getAllProducts());
         model.addAttribute("selectedProducts", order.getProducts());
         model.addAttribute("order", user.getOrder());
         model.addAttribute("user", user);
-        return "jsp/chooseproducts";
-
+        return "chooseproducts";
     }
 }
