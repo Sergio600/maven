@@ -9,6 +9,7 @@
 /Users/sergio/Documents/GitHub/maven/TestSpringMVC/src/main/java/com/sergio/service/ProductService.java
 /Users/sergio/Documents/GitHub/maven/TestSpringMVC/src/main/java/com/sergio/domain/User.java
 /Users/sergio/Documents/GitHub/maven/TestSpringMVC/src/main/java/com/sergio/config/ThymeleafConfiguration.java
+/Users/sergio/Documents/GitHub/maven/TestSpringMVC/src/main/java/com/sergio/config/HibernateConfig.java
 /Users/sergio/Documents/GitHub/maven/TestSpringMVC/src/main/java/com/sergio/config/WebSecurityConfig.java
 /Users/sergio/Documents/GitHub/maven/TestSpringMVC/src/main/java/com/sergio/filter/AccessFilter.java
 /Users/sergio/Documents/GitHub/maven/TestSpringMVC/src/main/java/com/sergio/domain/Product.java

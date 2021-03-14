@@ -13,6 +13,7 @@ com/sergio/controller/CartController.class
 com/sergio/config/WebSecurityConfig.class
 com/sergio/service/OrderService.class
 com/sergio/config/SecurityWebApplicationInitializer.class
+com/sergio/config/HibernateConfig.class
 com/sergio/controller/ProductController.class
 com/sergio/domain/Order.class
 com/sergio/domain/Product.class
