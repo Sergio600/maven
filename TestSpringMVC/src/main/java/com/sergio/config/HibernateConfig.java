@@ -33,7 +33,6 @@ public class HibernateConfig {
                 .ignoreFailedDrops(true)
                 .build();
     }
-
     @Bean
     public LocalSessionFactoryBean getSessionFactory(){
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
