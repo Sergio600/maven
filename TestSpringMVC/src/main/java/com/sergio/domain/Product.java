@@ -1,12 +1,23 @@
 package com.sergio.domain;
 
+import javax.persistence.*;
+
 /**
  * Class that represents POJO of product.
  */
+@Entity
+@Table(name="GOOD")
 public class Product {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(unique = true, nullable = false)
 	private int id;
+
+	@Column(unique = true, nullable = false)
 	private String title;
+
+	@Column(nullable = false)
 	private double price;
 
 	public Product(int id, String title, double price) {

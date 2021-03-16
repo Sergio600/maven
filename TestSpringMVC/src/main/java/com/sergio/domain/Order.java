@@ -1,18 +1,32 @@
 package com.sergio.domain;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Class that represents POJO of order.
  */
+@Entity
+@Table(name = "ORDERS")
 public class Order {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column (unique = true, nullable = false)
 	private Integer id;
-	private User user;
-	private int userID;
-	private List<Product> products = new ArrayList<>();
+
+	@Column(name = "TOTAL_PRICE", nullable = false)
 	private double totalPrice;
+
+	@Column(name = "USER_ID", nullable = false)
+	private int userID;
+
+
+	private User user;
+
+	private List<Product> products = new ArrayList<>();
+
 
 	public Order(){}
 

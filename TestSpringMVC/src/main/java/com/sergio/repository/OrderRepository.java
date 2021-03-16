@@ -30,7 +30,7 @@ public class OrderRepository {
                     "INNER JOIN USER\n" +
                     "ON USER.ID=ORDERS.USER_ID\n" +
                     "WHERE ORDERS.USER_ID=?;");
-            ps.setInt(1, user.getUserId());
+            ps.setInt(1, user.getId());
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -39,8 +39,8 @@ public class OrderRepository {
                 order.setTotalPrice(rs.getDouble(4));
 
                 User user1 = new User();
-                user1.setUserId(rs.getInt(2));
-                user1.setName(rs.getString(3));
+                user1.setId(rs.getInt(2));
+                user1.setLogin(rs.getString(3));
 
                 order.setUser(user1);
 
@@ -65,11 +65,11 @@ public class OrderRepository {
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement("INSERT INTO ORDERS(USER_ID) VALUES (?)");
-            ps.setInt(1, order.getUser().getUserId());
+            ps.setInt(1, order.getUser().getId());
             ps.execute();
 
             ps = connection.prepareStatement("SELECT * from ORDERS where USER_ID=?;");
-            ps.setInt(1, order.getUser().getUserId());
+            ps.setInt(1, order.getUser().getId());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 order.setId(rs.getInt("ID"));

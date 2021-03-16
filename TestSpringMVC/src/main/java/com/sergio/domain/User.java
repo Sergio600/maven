@@ -1,39 +1,56 @@
 package com.sergio.domain;
 
+import org.junit.ClassRule;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name="USER")
 public class User {
-    private int userId;
-    private String name;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID", unique = true, nullable = false)
+    private int id;
+
+    @Column(name ="LOGIN", unique = true, nullable = false)
+    private String login;
+
+    @Column(nullable = false)
     private String password;
-    private Order order;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Order> orders;
 
     public User(){}
 
-    public User(String name) {
-        this.name = name;
+    public User(String login) {
+        this.login = login;
     }
 
-    public Order getOrder() {
-        return order;
+    public int getId() {
+        return id;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public String getName() {
-        return name;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     public String getPassword() {
