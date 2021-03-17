@@ -1,7 +1,5 @@
 package com.sergio.domain;
 
-import org.junit.ClassRule;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -20,7 +18,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Order> orders;
 
     public User(){}

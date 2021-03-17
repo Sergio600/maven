@@ -28,14 +28,14 @@ public class CartController {
     @RequestMapping
     public String showCart(Model model, Principal principal) {
 
-        User user = userService.createOrGetUser(principal.getName());
-        Order order = orderService.createOrGetOrder(user);
-        order.setProducts(orderRepository.getProductsByOrder(order));
+//        User user = userService.createOrGetUser(principal.getName());
+//        Order order = orderService.createOrGetOrder(user);
+//        order.setProducts(orderRepository.getProductsByOrder(order));
 
-        model.addAttribute("user", user);
-        model.addAttribute("order", order);
-        model.addAttribute("selectedProducts", order.getProducts());
-        model.addAttribute("totalPrice", order.getTotalPrice());
+        model.addAttribute("user", userService.createOrGetUser(principal.getName()));
+        model.addAttribute("order", orderService.getCurrentOrder(principal.getName()));
+        model.addAttribute("selectedProducts", orderService.getCurrentOrder(principal.getName()).getProducts());
+        model.addAttribute("totalPrice", orderService.getCurrentOrder(principal.getName()).getTotalPrice());
         return "cart";
     }
 }

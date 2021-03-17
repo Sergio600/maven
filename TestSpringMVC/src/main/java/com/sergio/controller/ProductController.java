@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
@@ -31,27 +32,24 @@ public class ProductController {
 
     @RequestMapping
     public String makeOrder(ModelMap model, HttpServletRequest req, Principal principal) {
-        User user = userService.createOrGetUser(principal.getName());
-        Order order = orderService.createOrGetOrder(user);
 
-        /**
-         * Check request parameter remove
-         * if its != null than call method removeProduct to remove by index of product
-         */
+        User user = userService.createOrGetUser(principal.getName());
+        Order order = orderService.getCurrentOrder(principal.getName());
+
         if (req.getParameter("remove") != null) {
             int idToRemoveProduct = Integer.parseInt(req.getParameter("remove"));
-            order = orderService.removeProduct(order, idToRemoveProduct);
+            orderService.removeProductFromOrder(principal.getName(), idToRemoveProduct);
         } else {
             if (req.getParameterValues("selected") != null) {
-                order = orderService.addProducts(order, req.getParameter("selected"));
+                orderService.addProductToOrder(principal.getName(), Integer.parseInt(req.getParameter("selected")));
             }
         }
-        order.setProducts(orderRepository.getProductsByOrder(order));
+
 
         model.addAttribute("products", productService.getAllProducts());
-        model.addAttribute("selectedProducts", order.getProducts());
-        model.addAttribute("order", user.getOrder());
-        model.addAttribute("user", user);
+        model.addAttribute("selectedProducts", orderService.getCurrentOrder(principal.getName()).getProducts());
+        model.addAttribute("order", orderService.getCurrentOrder(principal.getName()));
+        model.addAttribute("user", principal.getName());
         return "chooseproducts";
     }
 }

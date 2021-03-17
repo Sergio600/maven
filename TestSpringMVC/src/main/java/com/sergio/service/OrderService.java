@@ -10,96 +10,66 @@ import com.sergio.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderService {
-    @Autowired
     private OrderRepository orderRepository;
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private ProductService productService;
-    @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    public OrderService (OrderRepository orderRepository, UserRepository userRepository, ProductRepository productRepository){
+        this.orderRepository = orderRepository;
+        this.userRepository = userRepository;
+        this.productRepository = productRepository;
+    }
 
-    /**
-     * Creates order or returns saved order.
-     *
-     * @param user .
-     * @return created order.
-     */
-    public Order createOrGetOrder(User user) {
-        if (user == null) {
+    public void addProductToOrder(String name, int id){
+        if(name==null || id ==0){
+            throw new InvalidArgumentException("Arguments cant be null");
+        }
+        Order current = getCurrentOrder(name);
+        List<Product> products = current.getProducts();
+        Product product = productRepository.getProductById(id);
+        products.add(product);
+        current.setTotalPrice(calcTotalPrice(current));
+        current.setProducts(products);
+        orderRepository.updateOrder(current);
+    }
+
+    public void removeProductFromOrder(String name, int id){
+        if(name==null || id == 0){
+            throw new InvalidArgumentException("Arguments cant be null");
+        }
+        Order current = getCurrentOrder(name);
+        List<Product> products = current.getProducts();
+        Product product = productRepository.getProductById(id);
+        products.remove(product);
+        current.setTotalPrice(calcTotalPrice(current));
+        current.setProducts(products);
+        orderRepository.updateOrder(current);
+    }
+
+
+    public double calcTotalPrice(Order current) {
+        double totalPrice =0;
+        List<Product> products = current.getProducts();
+        for (Product product: products) {
+            totalPrice+=product.getPrice();
+        }
+        return totalPrice;
+    }
+
+    public Order getCurrentOrder(String name) {
+        if (name == null) {
             throw new InvalidArgumentException("Name can't be null");
         }
-        Order order = orderRepository.getOrder(user);
-        return order;
-    }
-
-    /**
-     * Adds product to order.
-     *
-     * @param order           order id.
-     * @param selectedProduct string array of product keys from product map.
-     * @return order with saved order.
-     */
-    public Order addProducts(Order order, String selectedProduct) {
-        if (order == null || selectedProduct == null) {
-            throw new InvalidArgumentException("Arguments cant be null");
+        User user = userRepository.getByName(name).get();
+        if(user.getOrders().size() == 0){
+            return orderRepository.save(new Order(user));
+        } else {
+           return user.getOrders().get(0);
         }
-
-        int productId = Integer.parseInt(selectedProduct);
-
-        Product product = productRepository.getProductByID(productId);
-
-        orderRepository.addProduct(product, order);
-
-        order.setProducts(orderRepository.getProductsByOrder(order));
-        updateOrderTotalPrice(order);
-
-        return order;
     }
-
-    /**
-     * Removes product from order
-     *
-     * @param order
-     * @param productId
-     * @return order with removed product
-     */
-    public Order removeProduct(Order order, int productId) {
-        if (order == null) {
-            throw new InvalidArgumentException("Arguments cant be null");
-        }
-
-        orderRepository.removeProduct(productId, order);
-        order.setProducts(orderRepository.getProductsByOrder(order));
-        updateOrderTotalPrice(order);
-
-        return order;
-    }
-
-    /**
-     * Calculates and update total price of order.
-     *
-     * @param order order for calculation.
-     * @return total price.
-     */
-    public Order updateOrderTotalPrice(Order order) {
-        double totalPrice = 0;
-        for (Product product : order.getProducts()) {
-            totalPrice += product.getPrice();
-        }
-        orderRepository.updateTotalPrice(totalPrice, order);
-
-        return order;
-    }
-
-
-//    public static void printProducts(Order order) {
-//        System.out.println("Количество продуктов: " + order.getProducts().size());
-//        for (Product product : order.getProducts()) {
-//            System.out.print(product.getName() + " ");
-//        }
-//    }
 }

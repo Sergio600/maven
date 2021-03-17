@@ -1,7 +1,6 @@
 package com.sergio.domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,27 +15,20 @@ public class Order {
 	@Column (unique = true, nullable = false)
 	private Integer id;
 
-	@Column(name = "TOTAL_PRICE", nullable = false)
+	@Column(name = "TOTAL_PRICE")
 	private double totalPrice;
 
-	@Column(name = "USER_ID", nullable = false)
-	private int userID;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "ORDER_GOOD",
+	joinColumns = @JoinColumn(name = "ORDER_ID"),
+	inverseJoinColumns = @JoinColumn(name = "GOOD_ID"))
+	private List<Product> products;
 
-
+	@ManyToOne(optional=false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID")
 	private User user;
 
-	private List<Product> products = new ArrayList<>();
-
-
 	public Order(){}
-
-	public int getUserID() {
-		return userID;
-	}
-
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
 
 	public Order(User user) {
 		this.user = user;
@@ -73,6 +65,4 @@ public class Order {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
-
-
 }

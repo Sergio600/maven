@@ -2,20 +2,24 @@ package com.sergio.repository;
 
 import com.sergio.domain.User;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
+@Transactional
 public class UserRepository {
 
-//    @Autowired
-//    Connection connection;
-
     private SessionFactory sessionFactory;
+
+    @Autowired
+    public UserRepository(SessionFactory sessionFactory){
+        this.sessionFactory = sessionFactory;
+    }
 
     /**
      * Adds user to users and to Data Base
@@ -26,53 +30,22 @@ public class UserRepository {
     public User save(User user) {
         sessionFactory.getCurrentSession().save(user);
         return user;
-
-//        PreparedStatement ps = null;
-//        try {
-//            ps = connection.prepareStatement("INSERT INTO USER(LOGIN) VALUES (?)");
-//            ps.setString(1, user.getLogin());
-//            ps.execute();
-//
-//            ps = connection.prepareStatement("SELECT * from user where LOGIN=?;");
-//            ps.setString(1, user.getLogin());
-//            ResultSet rs = ps.executeQuery();
-//
-//            if (rs.next()) {
-//                user.setId(rs.getInt(1));
-//            }
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//        return user;
     }
 
     /**
      * Create or get user from DB
      *
-     * @param userLogin
+     * @param customer
      * @return
      */
-    public User getUser(String userLogin) {
-        User user = new User();
-
-        try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * from user where LOGIN=?;");
-            ps.setString(1, userLogin);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                user.setId(rs.getInt("ID"));
-                user.setLogin(userLogin);
-            } else {
-                user = new User(userLogin);
-                user = save(user);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public Optional<User> getByName(String customer) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from User u where u.login = :login");
+        query.setParameter("login", customer);
+        User user = (User) query.getSingleResult();
+        if (user == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of((User) user);
         }
-        return user;
     }
-
-
 }
