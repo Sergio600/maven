@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.sql.SQLException;
 
@@ -32,7 +34,7 @@ public class LoginController {
     }
 
     @RequestMapping("/login")
-    public String helloPage(Model model, Principal principal) throws SQLException {
+    public String helloPage(Model model, Principal principal, HttpServletRequest req) throws SQLException {
         if (principal != null) {
             return "redirect:/chooseproducts";
         } else {

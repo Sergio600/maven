@@ -48,16 +48,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery("select login, password, true from user where login=?")
                 .authoritiesByUsernameQuery("select login, 'ROLE_USER' from user where login =?");
     }
-
-//    @Bean
-//    public UserDetailsService users(){
-//        UserDetails user = User.builder()
-//                .username("user")
-//                .password("100")
-//                .roles("USER")
-//                .build();
-//       return new InMemoryUserDetailsManager(user);
-//    }
-
-
 }

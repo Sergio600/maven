@@ -1,6 +1,7 @@
 package com.sergio.controller;
 
 import com.sergio.domain.Order;
+import com.sergio.domain.Product;
 import com.sergio.domain.User;
 import com.sergio.repository.OrderRepository;
 import com.sergio.service.OrderService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/chooseproducts")
@@ -45,10 +47,13 @@ public class ProductController {
             }
         }
 
+        List<Product>products = productService.getAllProducts();
+        List<Product> selectedProducts = orderService.getCurrentOrder(principal.getName()).getProducts();
+        order = orderService.getCurrentOrder(principal.getName());
 
-        model.addAttribute("products", productService.getAllProducts());
-        model.addAttribute("selectedProducts", orderService.getCurrentOrder(principal.getName()).getProducts());
-        model.addAttribute("order", orderService.getCurrentOrder(principal.getName()));
+        model.addAttribute("products", products);
+        model.addAttribute("selectedProducts", selectedProducts);
+        model.addAttribute("order", order);
         model.addAttribute("user", principal.getName());
         return "chooseproducts";
     }

@@ -11,13 +11,13 @@ public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(unique = true, nullable = false)
+	@Column(name = "ID", unique = true, nullable = false)
 	private int id;
 
-	@Column(unique = true, nullable = false)
+	@Column(name = "TITLE", unique = true, nullable = false)
 	private String title;
 
-	@Column(nullable = false)
+	@Column(name="PRICE", nullable = false)
 	private double price;
 
 	public Product(int id, String title, double price) {
@@ -52,6 +52,4 @@ public class Product {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
-
 }

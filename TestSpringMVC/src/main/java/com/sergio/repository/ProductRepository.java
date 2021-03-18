@@ -21,7 +21,7 @@ public class ProductRepository {
     }
 
     public List<Product> getAllProducts() {
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM GOOD");
+        Query query = sessionFactory.getCurrentSession().createQuery("FROM GOOD", Product.class);
         return query.list();
     }
 
