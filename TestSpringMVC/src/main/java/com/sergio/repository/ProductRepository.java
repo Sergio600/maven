@@ -21,12 +21,12 @@ public class ProductRepository {
     }
 
     public List<Product> getAllProducts() {
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM GOOD", Product.class);
+        Query query = sessionFactory.getCurrentSession().createQuery("FROM Product", Product.class);
         return query.list();
     }
 
     public Product getProductById (int id){
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM GOOD WHERE good.id=:id");
+        Query query = sessionFactory.getCurrentSession().createQuery("FROM Product WHERE Product.id=:id", Product.class);
         query.setParameter("id", id);
         return (Product) query.getSingleResult();
         }

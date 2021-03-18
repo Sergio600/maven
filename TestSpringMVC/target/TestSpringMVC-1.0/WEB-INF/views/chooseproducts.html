@@ -15,7 +15,7 @@
     </nav>
 </form>
 
-<div class="header" th:text="'Hello ' + ${user.name} + ' !'"></div>
+<div class="header" th:text="'Hello ' + ${user.login} + ' !'"></div>
 </br>
 <div>Make your order!</div>
 
@@ -37,10 +37,12 @@
     <!-- ФОРМА ОТОБРАЖЕНИЯ ВЫБРАННЫХ ПРОДУКТОВ -->
     <p>You choose products:</p>
     <div>
+
         <div th:each="pickedProduct: ${selectedProducts}">
             <p th:text="${pickedProduct.title} + ' ' + ${pickedProduct.price} + '$'"></p>
             <button form="addOrRemove" th:value="${pickedProduct.id}" name="remove">remove</button>
         </div>
+
     </div>
 </div>
 </div>

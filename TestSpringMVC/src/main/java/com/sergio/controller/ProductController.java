@@ -47,14 +47,14 @@ public class ProductController {
             }
         }
 
-        List<Product>products = productService.getAllProducts();
-        List<Product> selectedProducts = orderService.getCurrentOrder(principal.getName()).getProducts();
-        order = orderService.getCurrentOrder(principal.getName());
 
-        model.addAttribute("products", products);
-        model.addAttribute("selectedProducts", selectedProducts);
-        model.addAttribute("order", order);
-        model.addAttribute("user", principal.getName());
+        if(order.getProducts()!=null){
+            model.addAttribute("selectedProducts", order.getProducts());
+        }
+
+        model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("order", orderService.getCurrentOrder(principal.getName()));
+        model.addAttribute("user", userService.createOrGetUser(principal.getName()));
         return "chooseproducts";
     }
 }
