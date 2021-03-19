@@ -37,12 +37,10 @@
     <!-- ФОРМА ОТОБРАЖЕНИЯ ВЫБРАННЫХ ПРОДУКТОВ -->
     <p>You choose products:</p>
     <div>
-
         <div th:each="pickedProduct: ${selectedProducts}">
             <p th:text="${pickedProduct.title} + ' ' + ${pickedProduct.price} + '$'"></p>
             <button form="addOrRemove" th:value="${pickedProduct.id}" name="remove">remove</button>
         </div>
-
     </div>
 </div>
 </div>

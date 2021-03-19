@@ -18,10 +18,10 @@ public class Order {
 	@Column(name = "TOTAL_PRICE")
 	private double totalPrice;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "ORDER_GOOD",
 	joinColumns = @JoinColumn(name = "ORDER_ID"),
-	inverseJoinColumns = @JoinColumn(name = "GOOD_ID"))
+	inverseJoinColumns = @JoinColumn(name = "GOOD_ID", unique = false))
 	private List<Product> products;
 
 	@ManyToOne(optional=false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)

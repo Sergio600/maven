@@ -26,7 +26,7 @@ public class ProductRepository {
     }
 
     public Product getProductById (int id){
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM Product WHERE Product.id=:id", Product.class);
+        Query query = sessionFactory.getCurrentSession().createQuery("from Product p where p.id = :id");
         query.setParameter("id", id);
         return (Product) query.getSingleResult();
         }

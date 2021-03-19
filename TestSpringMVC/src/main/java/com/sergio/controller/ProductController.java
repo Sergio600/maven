@@ -47,7 +47,7 @@ public class ProductController {
             }
         }
 
-
+        order = orderService.getCurrentOrder(principal.getName());
         if(order.getProducts()!=null){
             model.addAttribute("selectedProducts", order.getProducts());
         }

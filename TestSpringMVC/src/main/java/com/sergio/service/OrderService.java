@@ -10,6 +10,7 @@ import com.sergio.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -33,8 +34,10 @@ public class OrderService {
         List<Product> products = current.getProducts();
         Product product = productRepository.getProductById(id);
         products.add(product);
-        current.setTotalPrice(calcTotalPrice(current));
+
         current.setProducts(products);
+        current.setTotalPrice(calcTotalPrice(current));
+
         orderRepository.updateOrder(current);
     }
 
@@ -44,16 +47,27 @@ public class OrderService {
         }
         Order current = getCurrentOrder(name);
         List<Product> products = current.getProducts();
-        Product product = productRepository.getProductById(id);
-        products.remove(product);
-        current.setTotalPrice(calcTotalPrice(current));
+        products = removeProductByIdFromList(products, id);
         current.setProducts(products);
+        current.setTotalPrice(calcTotalPrice(current));
         orderRepository.updateOrder(current);
     }
 
+    public List<Product> removeProductByIdFromList (List<Product> products, int id){
+        Iterator iterator = products.iterator();
+        while (iterator.hasNext()){
+            Product product = (Product) iterator.next();
+            if(product.getId()==id){
+                iterator.remove();
+                break;
+            }
+        }
+        return products;
+    }
 
     public double calcTotalPrice(Order current) {
         double totalPrice =0;
+
         List<Product> products = current.getProducts();
         for (Product product: products) {
             totalPrice+=product.getPrice();
