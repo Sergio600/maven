@@ -1,5 +1,7 @@
 package com.sergio.domain;
 
+import com.sergio.dto.OrderDto;
+
 import javax.persistence.*;
 import java.util.List;
 
