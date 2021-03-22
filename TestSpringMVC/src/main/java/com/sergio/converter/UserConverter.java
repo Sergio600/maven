@@ -6,12 +6,12 @@ import com.sergio.exception.InvalidArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class UserConverter {
 
     OrderConverter orderConverter;
 
-    @Autowired
+//    @Autowired
     public UserConverter (OrderConverter orderConverter){
         this.orderConverter = orderConverter;
     }

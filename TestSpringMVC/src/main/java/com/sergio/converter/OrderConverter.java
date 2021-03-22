@@ -1,9 +1,7 @@
 package com.sergio.converter;
 
 import com.sergio.domain.Order;
-import com.sergio.domain.Product;
 import com.sergio.dto.OrderDto;
-import com.sergio.dto.ProductDto;
 import com.sergio.exception.InvalidArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,19 +9,19 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+//@Component
 public class OrderConverter {
 
     ProductConverter productConverter;
     UserConverter userConverter;
 
-    @Autowired
-    public OrderConverter (ProductConverter productConverter, UserConverter userConverter){
-        this.productConverter=productConverter;
+//    @Autowired
+    public OrderConverter(ProductConverter productConverter, UserConverter userConverter) {
+        this.productConverter = productConverter;
         this.userConverter = userConverter;
     }
 
-    public Order fromDto(OrderDto dto){
+    public Order fromDto(OrderDto dto) {
         if (dto == null) {
             throw new InvalidArgumentException("Can't be null");
         }
@@ -35,7 +33,7 @@ public class OrderConverter {
         return order;
     }
 
-    public OrderDto toDto(Order order){
+    public OrderDto toDto(Order order) {
         if (order == null) {
             throw new InvalidArgumentException("Can't be null");
         }
@@ -47,17 +45,17 @@ public class OrderConverter {
         return orderDto;
     }
 
-    public List<Order> fromDtoList(List<OrderDto> dto){
+    public List<Order> fromDtoList(List<OrderDto> dto) {
         List<Order> orders = new ArrayList<>();
-        for (OrderDto orderDto: dto) {
+        for (OrderDto orderDto : dto) {
             orders.add(fromDto(orderDto));
         }
         return orders;
     }
 
-    public List<OrderDto> toDtoList(List<Order> orders){
+    public List<OrderDto> toDtoList(List<Order> orders) {
         List<OrderDto> ordersDto = new ArrayList<>();
-        for (Order order: orders) {
+        for (Order order : orders) {
             ordersDto.add(toDto(order));
         }
         return ordersDto;

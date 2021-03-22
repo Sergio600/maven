@@ -1,9 +1,10 @@
 package com.sergio.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "USER")
+@Table(name="USER")
 public class User {
 
     @Id
@@ -11,13 +12,19 @@ public class User {
     @Column(name = "ID", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "NAME", unique = true, nullable = false)
-    private String name;
+    @Column(name ="LOGIN", unique = true, nullable = false)
+    private String login;
 
-    private Order order;
+    @Column(nullable = false)
+    private String password;
 
-    public User(){
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Order> orders;
 
+    public User(){}
+
+    public User(String login) {
+        this.login = login;
     }
 
     public int getId() {
@@ -28,19 +35,27 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getLogin() {
+        return login;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public Order getOrder() {
-        return order;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
