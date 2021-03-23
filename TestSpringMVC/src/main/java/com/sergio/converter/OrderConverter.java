@@ -4,18 +4,19 @@ import com.sergio.domain.Order;
 import com.sergio.dto.OrderDto;
 import com.sergio.exception.InvalidArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
-//@Component
+@Component
+@Lazy
 public class OrderConverter {
 
     ProductConverter productConverter;
     UserConverter userConverter;
 
-//    @Autowired
+    @Autowired
     public OrderConverter(ProductConverter productConverter, UserConverter userConverter) {
         this.productConverter = productConverter;
         this.userConverter = userConverter;

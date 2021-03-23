@@ -16,6 +16,7 @@ com/sergio/domain/Order.class
 com/sergio/repository/OrderRepository.class
 com/sergio/exception/OrderNotFoundException.class
 com/sergio/service/ProductService.class
+com/sergio/config/ThymeleafConfiguration.class
 com/sergio/converter/OrderConverter.class
 com/sergio/dto/UserDto.class
 com/sergio/config/SecurityWebApplicationInitializer.class

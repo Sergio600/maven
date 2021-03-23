@@ -3,13 +3,17 @@ package com.sergio.converter;
 import com.sergio.domain.User;
 import com.sergio.dto.UserDto;
 import com.sergio.exception.InvalidArgumentException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
-//@Component
+@Component
+@Lazy
 public class UserConverter {
 
     OrderConverter orderConverter;
 
-//    @Autowired
+    @Autowired
     public UserConverter (OrderConverter orderConverter){
         this.orderConverter = orderConverter;
     }

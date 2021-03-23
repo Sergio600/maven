@@ -1,7 +1,5 @@
 package com.sergio.controller;
 
-import com.sergio.domain.Order;
-import com.sergio.domain.User;
 import com.sergio.repository.OrderRepository;
 import com.sergio.service.OrderService;
 import com.sergio.service.UserService;
@@ -9,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.security.Principal;
 
 @Controller

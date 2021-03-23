@@ -1,0 +1,15 @@
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/domain/User.java
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/repository/UserRepository.java
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/domain/Product.java
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/repository/ProductRepository.java
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/config/WebAppConfig.java
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/exception/InvalidArgumentException.java
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/service/ProductService.java
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/service/OrderService.java
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/exception/OrderNotFoundException.java
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/domain/Order.java
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/config/HibernateConfig.java
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/controller/LoginController.java
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/repository/OrderRepository.java
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/service/UserService.java
+/Users/sergio/Documents/GitHub/maven/FinalHW/src/main/java/com/sergio/config/WebAppInitializer.java
