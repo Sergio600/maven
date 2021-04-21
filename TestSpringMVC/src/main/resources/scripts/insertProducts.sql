@@ -8,3 +8,7 @@
                     VALUES ('Phone',1000.0);
                     INSERT INTO GOOD(TITLE, PRICE)
                     VALUES ('car', 50000.0);
+
+
+  INSERT INTO USER(LOGIN, PASSWORD)
+                    VALUES ('Sergio', '100');
